@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Sber Hotel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/application.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header th:insert="fragments/navbar.html :: navbar"></header>
+    <div class="container px-4 gx-5">
+        <div th:each="room: ${rooms}" class="room row gx-5">
+            <div class="room-body">
+                <div>
+                    <h5 class="room-title md-0" th:text="${room.getRoomName()}"/>
+                    <p class="room-text text-muted" th:text="${room.getPrice()}"/>
+                </div>
+                <div class="row align-items-center">
+                    <div th:id="${room.getRoomName()}" class="carousel slide col" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-indicators">
+                                <button th:each="photo, iter: ${room.getRoomPhotos()}" type="button" th:attr="data-bs-slide-to=${iter.index},data-bs-target=${room.getRoomName()}" th:class="${iter.index == 0 ? 'active' : ''}"></button>
+                            </div>
+                            <div th:each="photo, iter: ${room.getRoomPhotos()}" th:classappend="${iter.index == 0 ? 'carousel-item active' : 'carousel-item'}">
+                                <img th:src="${photo}" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p>Тут отзывы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
