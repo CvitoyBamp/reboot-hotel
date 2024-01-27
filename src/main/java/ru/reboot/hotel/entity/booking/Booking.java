@@ -2,7 +2,9 @@ package ru.reboot.hotel.entity.booking;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
+import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.user.HotelUser;
 
@@ -13,14 +15,15 @@ import java.util.Set;
 @Entity
 @Table(name = "booking", schema = "public")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Booking {
+public class Booking extends AuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_order_number_seq")
-    @SequenceGenerator(name = "booking_order_number_seq", sequenceName = "booking_order_number_seq",  allocationSize=1)
-    @Column(name = "order_number", nullable = false)
-    Long orderNumber;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
+    @SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq",  allocationSize=1)
+    @Column(name = "id", nullable = false)
+    Long id;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -30,7 +33,7 @@ public class Booking {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @Column(name = "room_id", nullable = false)
-    Set<Room> rooms = new HashSet<>();
+    Set<Room> roomsId = new HashSet<>();
 
     @Column(name = "start_date", nullable = false)
     LocalDate startDate;

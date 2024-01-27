@@ -1,5 +1,5 @@
 CREATE TABLE PUBLIC.BOOKING (
-    ORDER_NUMBER SERIAL PRIMARY KEY, -- номер заказа (первичный ключ)
+    ID SERIAL PRIMARY KEY, -- номер заказа (первичный ключ)
     USER_ID INTEGER, -- внешний ключ из таблицы юзер
     ROOM_ID INTEGER, -- внешний ключ из таблицы номер
     START_DATE DATE NOT NULL, -- заезд

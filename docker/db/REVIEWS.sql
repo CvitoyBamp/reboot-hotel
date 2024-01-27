@@ -1,5 +1,5 @@
 CREATE TABLE PUBLIC.REVIEWS (
-    REVIEW_NUMBER SERIAL PRIMARY KEY, -- номер отзыва (первичный ключ)
+    ID SERIAL PRIMARY KEY, -- номер отзыва (первичный ключ)
     USER_ID INTEGER NOT NULL, -- внешний ключ из таблицы юзер
     COMMENT TEXT NOT NULL, -- комментарий клиента
     RATING SMALLINT CHECK (RATING BETWEEN 1 AND 5), -- оценка с констрейнтом от 1 до 5
