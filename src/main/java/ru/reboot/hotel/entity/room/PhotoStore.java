@@ -21,5 +21,5 @@ public class PhotoStore extends AuditEntity {
     Long id;
 
     @Column(name = "photo", nullable = false, unique = true)
-    Byte[] photo;
+    byte[] photo;
 }

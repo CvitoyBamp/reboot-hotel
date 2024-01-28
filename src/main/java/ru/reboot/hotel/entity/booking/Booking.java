@@ -29,8 +29,7 @@ public class Booking extends AuditEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     HotelUser userId;
 
-    @OneToMany(mappedBy = "booking",
-            fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @Column(name = "room_id", nullable = false)
     Set<Room> roomsId = new HashSet<>();

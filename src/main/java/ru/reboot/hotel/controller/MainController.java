@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.room.RoomService;
 
 @Controller
-public class HomeController {
+public class MainController {
 
     private RoomService roomService;
 
@@ -19,15 +18,32 @@ public class HomeController {
 
     @GetMapping("/main")
     public String getRoomsPage(Model model) {
-        model.addAttribute("rooms", roomService.getAllRooms());
         return "index";
     }
 
-    @GetMapping("/register")
-    public String registerPage(Model model) {
-        model.addAttribute("user", new HotelUser());
-        return "registration";
+    @GetMapping("/about")
+    public String aboutPage(Model model) {
+        return "about";
     }
 
+    @GetMapping("/reservation")
+    public String reservationPage(Model model) {
+        return "reservation";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage(Model model) {
+        return "contact";
+    }
+
+    @GetMapping("/rooms")
+    public String roomsPage(Model model) {
+        return "rooms";
+    }
+
+    @GetMapping("/reviews")
+    public String reviewsPage(Model model) {
+        return "components/reviews";
+    }
 
 }
