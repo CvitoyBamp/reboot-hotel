@@ -20,6 +20,9 @@ public class PhotoStore extends AuditEntity {
     @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
+    @Column(name = "photo_name", nullable = false, unique = true)
+    String photoName;
+
     @Column(name = "photo", nullable = false, unique = true)
     byte[] photo;
 }

@@ -4,3 +4,5 @@ CREATE TABLE PUBLIC.ROLES (
     ROW_INS_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- время, когда запись появилась
     ROW_UPD_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- будет меняться при апдейтах за счет триггеров
 );
+
+drop table PUBLIC.ROLES cascade;

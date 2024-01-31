@@ -10,4 +10,4 @@ CREATE TABLE PUBLIC.REVIEWS (
             REFERENCES PUBLIC.USER(ID)
 );
 
-drop table booking;
+drop table PUBLIC.REVIEWS cascade;

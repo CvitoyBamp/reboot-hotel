@@ -14,4 +14,4 @@ CREATE TABLE PUBLIC.BOOKING (
             REFERENCES PUBLIC.ROOM(ID)
 );
 
-drop table booking;
+drop table booking cascade;

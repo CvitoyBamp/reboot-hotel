@@ -4,20 +4,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.reboot.hotel.entity.room.PhotoStore;
+import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
 
     private RoomService roomService;
 
+    private PhotoStoreService photoStoreService;
+
+    @Autowired
+    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
+        this.photoStoreService = photoStoreService;
+    }
+
     @Autowired
     public void setRoomService(RoomService roomService) {
         this.roomService = roomService;
     }
 
-    @GetMapping("/main")
+    @GetMapping("/index")
     public String getRoomsPage(Model model) {
+        model.addAttribute("heroPhotos", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("hero"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        model.addAttribute("imgPhoto", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("img"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         return "index";
     }
 

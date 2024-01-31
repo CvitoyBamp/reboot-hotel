@@ -46,7 +46,7 @@ public class HotelUser extends AuditEntity {
     @Pattern(regexp = "[0-9.\\-() x/+]+")
     @Max(12)
     @Column(name = "phone", nullable = false)
-    Integer phone;
+    String phone;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
