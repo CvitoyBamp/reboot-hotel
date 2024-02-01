@@ -5,4 +5,7 @@ CREATE TABLE PUBLIC.ROLES (
     ROW_UPD_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- будет меняться при апдейтах за счет триггеров
 );
 
+insert into PUBLIC.ROLES values ('1', 'ADMIN');
+insert into PUBLIC.ROLES values ('2', 'USER');
+
 drop table PUBLIC.ROLES cascade;

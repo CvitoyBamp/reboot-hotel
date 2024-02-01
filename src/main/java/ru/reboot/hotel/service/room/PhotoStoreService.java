@@ -24,7 +24,7 @@ public class PhotoStoreService {
     @Transactional(readOnly = true)
     public Map<String, String> getAllPhotos() {
         return photoStoreRepository.findAll().stream().collect(
-                Collectors.toMap(PhotoStore::getPhotoName, p -> Arrays.toString(p.getPhoto()))
+                Collectors.toMap(PhotoStore::getPhotoName, PhotoStore::getPhoto)
         );
     }
 

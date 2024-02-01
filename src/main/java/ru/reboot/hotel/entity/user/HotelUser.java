@@ -30,6 +30,9 @@ public class HotelUser extends AuditEntity {
     @Column(name = "name", nullable = false, length = 128)
     String name;
 
+    @Column(name = "photo", nullable = false)
+    String photo;
+
     @Column(name = "password", nullable = false)
     String password;
 

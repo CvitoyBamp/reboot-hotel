@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.reboot.hotel.entity.room.PhotoStore;
+import ru.reboot.hotel.repository.room.PhotoStoreRepository;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
@@ -18,6 +19,13 @@ public class MainController {
     private RoomService roomService;
 
     private RoomTypeService roomTypeService;
+
+    private PhotoStoreService photoStoreService;
+
+    @Autowired
+    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
+        this.photoStoreService = photoStoreService;
+    }
 
     @Autowired
     public void setRoomTypeService(RoomTypeService roomTypeService) {
@@ -33,6 +41,8 @@ public class MainController {
     public String getRoomsPage(Model model) {
         model.addAttribute("rooms", roomService.getAllRooms());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+        model.addAttribute("sliderPhotos", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("slider"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         return "index";
     }
 

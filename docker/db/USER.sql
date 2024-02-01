@@ -2,8 +2,9 @@ CREATE TABLE PUBLIC.USER (
     ID SERIAL PRIMARY KEY, -- первичный ключ
     ROLE_ID INTEGER NOT NULL, -- внешний ключ к таблице ролей
     NAME VARCHAR(128) NOT NULL, -- имя гостя
+    PHOTO TEXT NOT NULL, -- фото гостя
     BIRTHDAY DATE NOT NULL, -- дата рождения гостя
-    PASSWORD TEXT NOT NULL,
+    PASSWORD TEXT NOT NULL, -- пароль аккаунта
     EMAIL VARCHAR(320) NOT NULL UNIQUE, -- имеил
     PHONE VARCHAR(11) NOT NULL UNIQUE, -- телефон
     ROW_INS_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- время, когда запись появилась
@@ -12,5 +13,7 @@ CREATE TABLE PUBLIC.USER (
         FOREIGN KEY (ROLE_ID)
             REFERENCES PUBLIC.ROLES(ID)
 );
+
+
 
 drop table public.user cascade ;

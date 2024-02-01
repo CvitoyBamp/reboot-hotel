@@ -24,5 +24,5 @@ public class PhotoStore extends AuditEntity {
     String photoName;
 
     @Column(name = "photo", nullable = false, unique = true)
-    byte[] photo;
+    String photo;
 }
