@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.reboot.hotel.entity.room.PhotoStore;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
+import ru.reboot.hotel.service.room.RoomTypeService;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,11 +17,11 @@ public class MainController {
 
     private RoomService roomService;
 
-    private PhotoStoreService photoStoreService;
+    private RoomTypeService roomTypeService;
 
     @Autowired
-    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
-        this.photoStoreService = photoStoreService;
+    public void setRoomTypeService(RoomTypeService roomTypeService) {
+        this.roomTypeService = roomTypeService;
     }
 
     @Autowired
@@ -30,10 +31,8 @@ public class MainController {
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
-        model.addAttribute("heroPhotos", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("hero"))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-        model.addAttribute("imgPhoto", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("img"))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "index";
     }
 

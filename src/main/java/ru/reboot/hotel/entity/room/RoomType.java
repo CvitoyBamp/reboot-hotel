@@ -43,7 +43,7 @@ public class RoomType extends AuditEntity {
     @Column(name = "adds")
     Additional adds;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Column(name = "photo_id")
-    Set<PhotoStore> photoId = new HashSet<>();
+    @Column(name = "photo_src")
+    String photoSRC;
+
 }
