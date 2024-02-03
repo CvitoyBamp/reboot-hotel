@@ -13,11 +13,11 @@ CREATE TABLE PUBLIC.USER (
             REFERENCES PUBLIC.ROLES(ID)
 );
 
-insert into public.user values ('1', '1','admin','03.23.1980','123456','admin@admin.ru','89001234567');
-insert into public.user values ('2', '2','Василий','03.14.2000','123456','vasya@ya.ru','89001234569');
+insert into public.user values ('1', '1','admin','23.03.1980','123456','admin@admin.ru','89001234567');
+insert into public.user values ('2', '2','Василий','14.03.2000','123456','vasya@ya.ru','89001234569');
 insert into public.user values ('3', '2','Мария','05.10.1993','123456','masha@google.com','89011234569');
 insert into public.user values ('4', '2','Виктор','03.04.1976','123456','vitya@yahoo.com','89011274569');
-insert into public.user values ('5', '2','Игорь','09.18.1987','123456','шпщк@нф.com','89011974269');
+insert into public.user values ('5', '2','Игорь','18.09.1987','123456','шпщк@нф.com','89011974269');
 
 
 drop table public.user cascade ;

@@ -10,7 +10,7 @@ CREATE TABLE PUBLIC.ROOM_TYPE (
     ROW_UPD_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- будет меняться при апдейтах за счет триггеров
 );
 
-drop table PUBLIC.ROOM_TYPE cascade;
+-- drop table PUBLIC.ROOM_TYPE cascade;
 
 insert into public.room_type values ('1', 'Одноместный номер', 'Одноместный номер для одного с максимальным комфортом','1','0','{}','/images/img_1.jpg');
 insert into public.room_type values ('2', 'Семейный номер', 'Семейный номер для родителей с детьми','3','2','{}','/images/img_2.jpg');
