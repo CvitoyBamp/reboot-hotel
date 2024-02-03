@@ -1,6 +1,7 @@
 package ru.reboot.hotel.service.room;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.reboot.hotel.entity.room.RoomType;
@@ -18,6 +19,7 @@ public class RoomTypeService {
         this.roomTypeRepository = roomTypeRepository;
     }
 
+    @Cacheable("roomType")
     @Transactional(readOnly = true)
     public List<RoomType> getAllRoomTypes() {
         return roomTypeRepository.findAll();

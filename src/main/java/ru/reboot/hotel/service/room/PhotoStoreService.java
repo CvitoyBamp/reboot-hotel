@@ -1,6 +1,7 @@
 package ru.reboot.hotel.service.room;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.reboot.hotel.entity.room.PhotoStore;
@@ -21,6 +22,7 @@ public class PhotoStoreService {
         this.photoStoreRepository = photoStoreRepository;
     }
 
+    @Cacheable("photos")
     @Transactional(readOnly = true)
     public Map<String, String> getAllPhotos() {
         return photoStoreRepository.findAll().stream().collect(

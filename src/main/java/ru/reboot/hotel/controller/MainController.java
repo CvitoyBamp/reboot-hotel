@@ -54,7 +54,6 @@ public class MainController {
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         model.addAttribute("sliderPhotos", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("slider"))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-
         model.addAttribute("reviews", reviewsService.getReviews());
         return "index";
     }
@@ -81,7 +80,7 @@ public class MainController {
 
     @GetMapping("/reviews")
     public String reviewsPage(Model model) {
-        return "components/reviews";
+        return "fragments/reviews";
     }
 
 }
