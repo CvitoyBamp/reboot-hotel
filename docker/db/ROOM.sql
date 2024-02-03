@@ -15,3 +15,5 @@ drop table room cascade;
 insert into PUBLIC.ROOM values ('1', '1', '90', 'false');
 insert into PUBLIC.ROOM values ('2', '2', '120', 'false');
 insert into PUBLIC.ROOM values ('3', '3', '250', 'false');
+
+delete from room cascade;

@@ -32,8 +32,11 @@ public class Reviews extends AuditEntity {
     @Column(name = "rating", columnDefinition = "SMALLINT CHECK (RATING BETWEEN 1 AND 5)")
     Short rating;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    HotelUser hotelUserId;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = HotelUser.class)
+//    @JoinColumn(name = "user_id")
+//    HotelUser hotelUserId;
+
+    @Column(name = "user_id", nullable = false)
+    Long userId;
 
 }

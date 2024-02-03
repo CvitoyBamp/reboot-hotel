@@ -7,12 +7,13 @@ CREATE TABLE PUBLIC.PHOTO_STORE (
 );
 
 --Автогенератор инсертов смотри в HotelApplication.java
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('0','slider-1.jpg','https://downloader.disk.yandex.ru/preview/cbd04e6435a6870563e3af0a0bb09a289fca73b30a831bc4f1ebf345234e3bf0/65bc27fe/DySZ-U7w4E2DfCvEmgH47sXabuFaXWiCFioqAIuzMWjR-tXyTgqoc031k_HOjBalyDLA2BOI_c5B8yLcjLXk1w%3D%3D?uid=0&filename=slider-1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('2','slider-2.jpg','https://downloader.disk.yandex.ru/preview/c9971ecf293224624b31dc1daf3f8102cf48ef81fe661641be9c47d2dea0d487/65bc28fd/DhZ126iO9fZA9i-XhMfn0xDzU5wYC9p3lTekU71G2zOxElCqZ3-Pb10YZUzIfD938OQOe6_QTRXZS2RMsMuGhA%3D%3D?uid=0&filename=slider-2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('5','slider-3.jpg','https://downloader.disk.yandex.ru/preview/4ec01088295583924680c7dd8fbbd076c9be7a7eb46aa96d26a8896b48cdba42/65bc2917/Q5Wdhn0PrzrMIAXvtr1FysHZthKVdUaqUcV5B4-m5IAu7xuR-7eS6_guuXReIClWgC7MOuXGYYF3FUPzQ4fplw%3D%3D?uid=0&filename=slider-3.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('6','slider-4.jpg','https://downloader.disk.yandex.ru/preview/33ca7c94e144d1e741b1b0b84b425d3012c433a348bb169945f168857a2a2ba8/65bc2932/UdYt_SvNkrfBIT80wNXCHxl0bUPYQo3n0NkdUyZockvd7W1vgjHgryLBrfdl3ZWj1Yis_9Li0tdQ8ZLBED0Mpg%3D%3D?uid=0&filename=slider-4.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('7','slider-5.jpg','https://downloader.disk.yandex.ru/preview/e464e94f06765eee9167f40c7ea1f23e506e04a84ba006c234e1b81b79dbcc87/65bc2969/7ogDMR22MNHK8G4cQJCeZDbd1iisfjwD35xc7rU5nhhy_S5Mv3cl1anebk4UiWZWsNsgTHdwYdYOVdj8SEiU1A%3D%3D?uid=0&filename=slider-5.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('8','slider-6.jpg','https://downloader.disk.yandex.ru/preview/405fcc2a60d910eed5a3c11678576d966e8eef28c0c8d9677f21a93b6e848d6f/65bc2988/evPdgdD5ySDTS4Of6g9FSr5Wo_6Guotm_1-EIWg3Xw3rF_aWATstUI4m1rIaXUiZl0Y6wM6tjoX_aCcX7D3Kkg%3D%3D?uid=0&filename=slider-6.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
-insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('11','slider-7.jpg','https://downloader.disk.yandex.ru/preview/972bf17d97c807e848d0fa64b8e5af09eac05f351916e11b775e68c7412ac32a/65bc29ab/UW2i31lARx8AujxxitppfLXAKCd6jxFtvdtH6R_0nKBeSY5qSrWqGXyzRt0A5-D77ZWWM7-GZqeWB0L64IOIZA%3D%3D?uid=0&filename=slider-7.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('0','slider-1.jpg','/images/slider-1.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('2','slider-2.jpg','/images/slider-2.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('5','slider-3.jpg','/images/slider-3.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('6','slider-4.jpg','/images/slider-4.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('7','slider-5.jpg','/images/slider-5.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('8','slider-6.jpg','/images/slider-6.jpg');
+insert into PUBLIC.PHOTO_STORE(id, photo_name, photo) values ('11','slider-7.jpg','/images/slider-7.jpg');
 
 drop table public.photo_store cascade;
+

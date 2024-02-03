@@ -10,4 +10,12 @@ CREATE TABLE PUBLIC.REVIEWS (
             REFERENCES PUBLIC.USER(ID)
 );
 
+insert into public.reviews values ('1', '2', 'Очень понравился номер', '5');
+insert into public.reviews values ('2', '2', 'Супер-отель, 4 за неприветливость персонала', '4');
+insert into public.reviews values ('3', '3', 'Место нормальное, ресторан неочень', '3');
+insert into public.reviews values ('4', '3', 'Не поменяли полотенце', '2');
+insert into public.reviews values ('5', '4', 'Ужасное место, нет мидий', '1');
+insert into public.reviews values ('6', '5', 'Больше не приеду: Манжерок лучше.', '4');
+
+
 drop table PUBLIC.REVIEWS cascade;

@@ -8,11 +8,13 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.booking.Booking;
+import ru.reboot.hotel.entity.reviews.Reviews;
 import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.utils.annotations.ValidLogin;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "public")
@@ -29,9 +31,6 @@ public class HotelUser extends AuditEntity {
 
     @Column(name = "name", nullable = false, length = 128)
     String name;
-
-    @Column(name = "photo", nullable = false)
-    String photo;
 
     @Column(name = "password", nullable = false)
     String password;
@@ -54,5 +53,8 @@ public class HotelUser extends AuditEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     Roles roles;
+
+    @OneToMany(mappedBy = "userId", targetEntity = Reviews.class)
+    List<Reviews> reviewsList;
 
 }

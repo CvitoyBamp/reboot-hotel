@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 
     <!-- Theme Style -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
   </head>
   <body>
     
@@ -45,7 +45,7 @@
             <!-- END menu-toggle -->
 
             <!-- MENU block -->
-            <div id="menu_id"></div>
+            <div th:insert="~{fragments/menu.html :: menu}"></div>
 
           </div>
         </div>
@@ -58,7 +58,7 @@
         <div class="row site-hero-inner justify-content-center align-items-center">
           <div class="col-md-10 text-center" data-aos="fade-up">
             <span class="custom-caption text-uppercase text-white d-block  mb-3">Добро пожаловать в наш 5 <span class="fa fa-star text-primary"></span>   Hotel</span>
-            <h1 class="heading">Лучшее место для отдыха </h1>
+            <h1 class="heading">Лучшее место для отдыха</h1>
           </div>
         </div>
       </div>
@@ -71,7 +71,8 @@
     </section>
     <!-- END section -->
 
-    <div id="check_availability_rooms_form"></div>
+    <!-- Insert room reservation fragment -->
+    <div th:insert="~{fragments/check_availability_rooms_form.html :: rooms}"></div>
 
     <section class="py-5 bg-light">
       <div class="container">
@@ -84,9 +85,8 @@
           </div>
           <div class="col-md-12 col-lg-6 order-lg-1" data-aos="fade-up">
             <h2 class="heading">Добро пожаловать!</h2>
-            <p class="mb-4 h4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p class="mb-4 h4">Наш уютный и небольшой отель, окутанный атмосферой непринужденности, в которой каждый гость почувствует себя комфортно, позволит отдохнуть Вам на берегу Лазурного берега вдали от шумного города.</p>
           </div>
-          
         </div>
       </div>
     </section>
@@ -95,14 +95,13 @@
       <div class="container">
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-7">
-            <h2 class="heading" data-aos="fade-up">Номера и люксы </h2>
-            <p data-aos="fade-up" data-aos-delay="100">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <h2 class="heading" data-aos="fade-up">Номера и люксы</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Позвольте себе насладиться отдыхом в лучших условиях</p>
           </div>
         </div>
-        <div class="row">
-          <div class="row">
-            <div class="col-md-6 col-lg-4" data-aos="fade-up">
-              <a href="#" class="room" th:each="room,iter : ${rooms}">
+        <div class="row row-cols-3">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" th:each="room,iter : ${rooms}">
+              <a href="#" class="room">
                 <figure class="img-wrap">
                   <img th:src="${roomsType.get(iter.index).getPhotoSRC()}" th:alt="${roomsType.get(iter.index).getRoomName()}" class="img-fluid mb-3">
                 </figure>
@@ -112,7 +111,6 @@
                 </div>
               </a>
             </div>
-          </div>
         </div>
       </div>
     </section>
@@ -123,14 +121,14 @@
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-7">
             <h2 class="heading" data-aos="fade-up">Фото</h2>
-            <p data-aos="fade-up" data-aos-delay="100">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p data-aos="fade-up" data-aos-delay="100">Насладитесь красотами Вашего премиального отдыха</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
               <div class="slider-item" th:each="sliderPhoto: ${sliderPhotos}">
-                <a th:href="${sliderPhoto.getValue()}" data-fancybox="images" data-caption="Caption for this image"><img th:src="${sliderPhoto.getValue()}" alt="Image placeholder" class="img-fluid"></a>
+                <a th:href="${sliderPhoto.getValue()}" data-fancybox="images" data-caption="Caption for this image"><img th:src="${sliderPhoto.getValue()}" th:alt="${sliderPhoto.getKey()}" class="img-fluid"></a>
               </div>
             </div>
             <!-- END slider -->
@@ -150,72 +148,12 @@
         </div>
         <div class="row">
           <div class="js-carousel-2 owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
+            <div class="testimonial text-center slider-item" th:each="review: ${reviews}">
               <blockquote>
-
-                <p>&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
+                <p th:text="${review.values().toArray()[0]}">&ldquo;Comment&rdquo;</p>
               </blockquote>
-              <p><em>&mdash; Jean Smith</em></p>
+              <p><em th:text="${review.values().toArray()[1]}">&mdash;Username</em></p>
             </div>
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
-              <blockquote>
-                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
-              </blockquote>
-              <p><em>&mdash; John Doe</em></p>
-            </div>
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_3.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
-              <blockquote>
-
-                <p>&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&rdquo;</p>
-              </blockquote>
-              <p><em>&mdash; John Doe</em></p>
-            </div>
-
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
-              <blockquote>
-
-                <p>&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-              </blockquote>
-              <p><em>&mdash; Jean Smith</em></p>
-            </div>
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_2.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
-              <blockquote>
-                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
-              </blockquote>
-              <p><em>&mdash; John Doe</em></p>
-            </div>
-
-            <div class="testimonial text-center slider-item">
-              <div class="author-image mb-3">
-                <img src="images/person_3.jpg" alt="Image placeholder" class="rounded-circle mx-auto">
-              </div>
-              <blockquote>
-
-                <p>&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.&rdquo;</p>
-              </blockquote>
-              <p><em>&mdash; John Doe</em></p>
-            </div>
-
           </div>
             <!-- END slider -->
         </div>
@@ -223,9 +161,11 @@
       </div>
     </section>
 
-    <div id="reserve_now"></div>
+    <!-- Insert reservation fragment -->
+    <div th:insert="~{fragments/reserve_now_block.html :: reserve}"></div>
 
-    <div id="footer_block"></div>
+    <!-- Insert footer section (about us and etc.)-->
+    <div th:insert="~{fragments/footer.html :: footer}"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js" integrity="sha512-KgffulL3mxrOsDicgQWA11O6q6oKeWcV00VxgfJw4TcM8XRQT8Df9EsrYxDf7tpVpfl3qcYD96BpyPvA4d1FDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -238,6 +178,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.min.js" integrity="sha512-TYfUH4Mbt6NcWkJI7RS5MoMqFSkpBCChADy2EjAiFr5ckAdTjOUUjnTA3GH8PQAIa2Nz7eR/4PR9xXY3uhnu/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="js/main.js"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
   </body>
 </html>

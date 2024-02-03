@@ -207,27 +207,4 @@
     });
   
   };
-
-  $(function(){
-    const menuBlock = $("#menu_id");
-    if (menuBlock.length) {
-      menuBlock.load("./components/menu.html");
-    }
-
-    const checkAvailabilityForm = $("#check_availability_rooms_form");
-    if (checkAvailabilityForm.length) {
-      checkAvailabilityForm.load("components/check_availability_rooms_form.html");
-    }
-
-    const reserveNow = $("#reserve_now");
-    if (reserveNow.length) {
-      reserveNow.load("components/reserve_now_block.html");
-    }
-
-    const footer = $("#footer_block");
-    if (footer.length) {
-      footer.load("components/footer.html");
-    }
-
-  });
 })(jQuery);
