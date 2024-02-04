@@ -2,6 +2,7 @@ package ru.reboot.hotel.repository.room;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.reboot.hotel.entity.room.Room;
 
@@ -16,5 +17,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query("SELECT new map(r.roomTypeId as room_type_id, MIN(r.pricePerDay) as price) FROM Room r where r.isLocked = false GROUP BY r.roomTypeId order by r.roomTypeId")
     List<Map<String, String>> findFreeRooms();
+
+    @Query("SELECT new map(r.roomTypeId as room_type_id, MIN(r.pricePerDay) as price) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.isLocked = false and rt.maxAdults >= :adults and rt.maxChildren >= :kids GROUP BY r.roomTypeId order by r.roomTypeId")
+    List<Map<String, String>> findRoomsForReservationData(@Param("adults") int adults, @Param("kids") int kids);
 
 }
