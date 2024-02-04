@@ -75,6 +75,8 @@ public class MainController {
 
     @GetMapping("/rooms")
     public String roomsPage(Model model) {
+        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "rooms";
     }
 
