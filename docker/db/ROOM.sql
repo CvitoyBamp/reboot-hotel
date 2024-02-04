@@ -15,5 +15,7 @@ CREATE TABLE PUBLIC.ROOM (
 insert into PUBLIC.ROOM values ('1', '1', '90', 'false');
 insert into PUBLIC.ROOM values ('2', '2', '120', 'false');
 insert into PUBLIC.ROOM values ('3', '3', '250', 'false');
+insert into PUBLIC.ROOM values ('4', '1', '95', 'false');
+insert into PUBLIC.ROOM values ('5', '1', '100', 'false');
 
 delete from room cascade;

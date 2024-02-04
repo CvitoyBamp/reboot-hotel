@@ -9,9 +9,11 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.booking.Booking;
+import ru.reboot.hotel.entity.reviews.Reviews;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -45,5 +47,8 @@ public class RoomType extends AuditEntity {
 
     @Column(name = "photo_src")
     String photoSRC;
+
+    @OneToMany(mappedBy = "roomTypeId", targetEntity = Room.class)
+    List<Room> rooms;
 
 }

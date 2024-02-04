@@ -100,14 +100,14 @@
           </div>
         </div>
         <div class="row row-cols-3">
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" th:each="room,iter : ${rooms}">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" th:each="room: ${rooms}">
               <a href="#" class="room">
                 <figure class="img-wrap">
-                  <img th:src="${roomsType.get(iter.index).getPhotoSRC()}" th:alt="${roomsType.get(iter.index).getRoomName()}" class="img-fluid mb-3">
+                  <img th:src="${roomsType.get(room.values().toArray()[1]-1).getPhotoSRC()}" th:alt="${roomsType.get(room.values().toArray()[1]-1).getRoomName()}" class="img-fluid mb-3">
                 </figure>
                 <div class="p-3 text-center room-info">
-                  <h2 th:text="${roomsType.get(iter.index).getRoomName()}">Название номера</h2>
-                  <span class="text-uppercase letter-spacing-1" th:text="${room.getPricePerDay()} + '$/за ночь'">Цена за ночь</span>
+                  <h2 th:text="${roomsType.get(room.values().toArray()[1]-1).getRoomName()}">Название номера</h2>
+                  <span class="text-uppercase letter-spacing-1" th:text="'от ' + ${room.values().toArray()[0]} + '$/за ночь'">Цена за ночь</span>
                 </div>
               </a>
             </div>

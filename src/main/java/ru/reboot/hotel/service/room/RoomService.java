@@ -7,6 +7,7 @@ import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.repository.room.RoomRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RoomService {
@@ -21,6 +22,16 @@ public class RoomService {
     @Transactional(readOnly = true)
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Map<String, String>> getUniqueRooms() {
+        return roomRepository.findMinPricePerDayByRoomTypeId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Map<String, String>> getFreeRooms() {
+        return roomRepository.findFreeRooms();
     }
 
 }

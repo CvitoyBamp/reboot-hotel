@@ -38,8 +38,11 @@ public class Room extends AuditEntity {
     @Column(name = "is_locked", nullable = false)
     Boolean isLocked;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_type_id", referencedColumnName = "id")
-    RoomType roomTypeId;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "room_type_id", referencedColumnName = "id")
+//    RoomType roomTypeId;
+
+    @Column(name = "room_type_id", nullable = false)
+    Long roomTypeId;
 
 }

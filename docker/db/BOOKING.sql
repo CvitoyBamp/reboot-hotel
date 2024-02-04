@@ -4,6 +4,7 @@ CREATE TABLE PUBLIC.BOOKING (
     ROOM_ID INTEGER, -- внешний ключ из таблицы номер
     START_DATE DATE NOT NULL, -- заезд
     END_DATE DATE NOT NULL, -- выезд
+    NOTE TEXT,
     ROW_INS_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- время, когда запись появилась
     ROW_UPD_TIMESTAMP TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- будет меняться при апдейтах за счет триггеров
     CONSTRAINT FK_BOOKING_USER

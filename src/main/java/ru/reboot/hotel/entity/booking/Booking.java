@@ -39,4 +39,7 @@ public class Booking extends AuditEntity {
 
     @Column(name = "end_date", nullable = false)
     LocalDate endDate;
+
+    @Column(name = "note", nullable = false)
+    String note;
 }

@@ -50,7 +50,7 @@ public class MainController {
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
-        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("rooms", roomService.getUniqueRooms());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         model.addAttribute("sliderPhotos", photoStoreService.getAllPhotos().entrySet().stream().filter(v -> v.getKey().contains("slider"))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
@@ -75,7 +75,7 @@ public class MainController {
 
     @GetMapping("/rooms")
     public String roomsPage(Model model) {
-        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("rooms", roomService.getFreeRooms());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "rooms";
     }
