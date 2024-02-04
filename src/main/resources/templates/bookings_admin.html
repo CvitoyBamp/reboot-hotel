@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Бронирования</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div id="navbar"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Бронирования</h1>
+                <p class="mb-4">Бронирование номеров в отеле.</p>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Бронирования</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Пользователь</th>
+                                    <th>Номер</th>
+                                    <th>От</th>
+                                    <th>До</th>
+                                    <th>Создано</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Пользователь</th>
+                                    <th>Номер</th>
+                                    <th>От</th>
+                                    <th>До</th>
+                                    <th>Создано</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr>
+                                    <td><a href="#">mae.white@example.org</a></td>
+                                    <td><a href="#">Ferry Club</a></td>
+                                    <td>2024-01-04 09:39</td>
+                                    <td>2024-01-03 04:33</td>
+                                    <td>2024-01-12 06:46</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">lubowitz.josefa@example.com</a></td>
+                                    <td><a href="#">Eloisa Manor</a></td>
+                                    <td>2024-01-13 07:14</td>
+                                    <td>2024-01-31 10:42</td>
+                                    <td>2024-01-18 12:27</td>
+                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">harmony56@example.net</a></td>
+                                    <td><a href="#">Rusty Union</a></td>
+                                    <td>2024-01-08 17:37</td>
+                                    <td>2024-01-30 01:30</td>
+                                    <td>2024-01-23 16:02</td>
+                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">tkuhlman@example.org</a></td>
+                                    <td><a href="#">Justen Burgs</a></td>
+                                    <td>2024-01-31 20:40</td>
+                                    <td>2024-01-15 15:47</td>
+                                    <td>2024-01-21 03:07</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">geffertz@example.net</a></td>
+                                    <td><a href="#">Carmel Terrace</a></td>
+                                    <td>2024-01-04 08:27</td>
+                                    <td>2024-01-08 15:58</td>
+                                    <td>2024-01-05 18:27</td>
+                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">bcrona@example.org</a></td>
+                                    <td><a href="#">Kutch Harbors</a></td>
+                                    <td>2024-01-04 19:49</td>
+                                    <td>2024-02-01 08:05</td>
+                                    <td>2024-01-23 02:30</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">jonathan.friesen@example.com</a></td>
+                                    <td><a href="#">Georgianna Views</a></td>
+                                    <td>2024-01-19 13:46</td>
+                                    <td>2024-02-01 13:04</td>
+                                    <td>2024-01-26 18:55</td>
+                                    <td><span class="badge badge-pill badge-danger">Отменено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">earnestine.oconnell@example.com</a></td>
+                                    <td><a href="#">Kozey Track</a></td>
+                                    <td>2024-01-21 08:37</td>
+                                    <td>2024-01-20 05:49</td>
+                                    <td>2024-01-17 14:59</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">xheaney@example.net</a></td>
+                                    <td><a href="#">Derek Locks</a></td>
+                                    <td>2024-01-06 09:29</td>
+                                    <td>2024-01-25 20:47</td>
+                                    <td>2024-01-14 19:38</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">nicholas.roob@example.org</a></td>
+                                    <td><a href="#">Felipa Harbor</a></td>
+                                    <td>2024-01-21 04:20</td>
+                                    <td>2024-02-03 23:58</td>
+                                    <td>2024-01-16 11:55</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">darwin.reichert@example.org</a></td>
+                                    <td><a href="#">Ian Rue</a></td>
+                                    <td>2024-01-22 07:13</td>
+                                    <td>2024-01-28 13:55</td>
+                                    <td>2024-01-26 03:16</td>
+                                    <td><span class="badge badge-pill badge-danger">Отменено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">fredy11@example.net</a></td>
+                                    <td><a href="#">Ian Roads</a></td>
+                                    <td>2024-01-03 15:38</td>
+                                    <td>2024-01-01 16:29</td>
+                                    <td>2024-01-10 04:21</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">anais33@example.org</a></td>
+                                    <td><a href="#">Kenyon Summit</a></td>
+                                    <td>2024-01-31 07:03</td>
+                                    <td>2024-01-02 19:52</td>
+                                    <td>2024-01-06 17:55</td>
+                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">casper16@example.net</a></td>
+                                    <td><a href="#">Lindgren Village</a></td>
+                                    <td>2024-01-01 04:45</td>
+                                    <td>2024-01-21 20:36</td>
+                                    <td>2024-01-22 22:01</td>
+                                    <td><span class="badge badge-pill badge-dark">Завершено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">jorge.littel@example.net</a></td>
+                                    <td><a href="#">Maci Street</a></td>
+                                    <td>2024-01-13 04:28</td>
+                                    <td>2024-02-03 11:04</td>
+                                    <td>2024-01-23 03:55</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><a href="#">janae73@example.com</a></td>
+                                    <td><a href="#">Nona Island</a></td>
+                                    <td>2024-01-26 07:50</td>
+                                    <td>2024-02-03 18:07</td>
+                                    <td>2024-01-16 01:53</td>
+                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/include_components.js"></script>
+
+</body>
+
+</html>
