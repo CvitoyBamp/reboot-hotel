@@ -83,6 +83,7 @@ public class MainController {
 
     @GetMapping("/contact")
     public String contactPage(Model model) {
+        model.addAttribute("reviews", reviewsService.getReviews());
         return "contact";
     }
 
@@ -91,7 +92,6 @@ public class MainController {
                                   @RequestParam(name="score", required=false, defaultValue= "5") Short score,
                                   @RequestParam(name="email", required=false) String email,
                                   @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,Model model) {
-
         for (HotelUser i: userService.getAllUser()){
             if (i.getEmail().equals(email)){
                 Long userId =  i.getId();
@@ -99,7 +99,8 @@ public class MainController {
                 Short rating = score;
                 reviewsService.addReview(userId, comment, rating);
 
-                return "fragments/reviews";
+                model.addAttribute("reviews", reviewsService.getReviews());
+                return "contact";
             }
         }
 //        Нужно всплывающее окно == "Вы не жили у нас"
