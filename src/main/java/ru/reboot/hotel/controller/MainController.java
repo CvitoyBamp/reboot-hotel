@@ -24,8 +24,8 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Slf4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
 public class MainController {
 
@@ -38,28 +38,6 @@ public class MainController {
     private ReviewsService reviewsService;
 
     private UserService userService;
-
-//    @Autowired
-//    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
-//        this.photoStoreService = photoStoreService;
-//    }
-//
-//    @Autowired
-//    public void setRoomTypeService(RoomTypeService roomTypeService) {
-//        this.roomTypeService = roomTypeService;
-//    }
-//
-//    @Autowired
-//    public void setRoomService(RoomService roomService) {
-//        this.roomService = roomService;
-//    }
-//
-//    @Autowired
-//    public void setReviewsService(ReviewsService reviewsService) {
-//        this.reviewsService = reviewsService;
-//    }
-
-
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
@@ -113,6 +91,11 @@ public class MainController {
         return "rooms";
     }
 
+    @GetMapping("/reviews")
+    public String reviewsPage(Model model) {
+        return "fragments/reviews";
+    }
+
     @PostMapping("/checkFreeData")
     public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData", required = false) LocalDate inData,
                                                       @RequestParam(value = "outData", required = false) LocalDate outData,
@@ -122,11 +105,6 @@ public class MainController {
         model.addAttribute("rooms", roomService.getRoomsAfterGettingData(adults, kids));
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "rooms";
-    }
-
-    @GetMapping("/reviews")
-    public String reviewsPage(Model model) {
-        return "fragments/reviews";
     }
 
 }
