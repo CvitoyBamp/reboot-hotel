@@ -1,5 +1,7 @@
 package ru.reboot.hotel.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,17 +10,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.reboot.hotel.entity.room.PhotoStore;
+import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.reviews.ReviewsRepository;
 import ru.reboot.hotel.repository.room.PhotoStoreRepository;
+import ru.reboot.hotel.repository.user.HotelUserRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
+import ru.reboot.hotel.service.user.UserService;
 
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Slf4j
 @Controller
 public class MainController {
@@ -31,25 +37,29 @@ public class MainController {
 
     private ReviewsService reviewsService;
 
-    @Autowired
-    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
-        this.photoStoreService = photoStoreService;
-    }
+    private UserService userService;
 
-    @Autowired
-    public void setRoomTypeService(RoomTypeService roomTypeService) {
-        this.roomTypeService = roomTypeService;
-    }
+//    @Autowired
+//    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
+//        this.photoStoreService = photoStoreService;
+//    }
+//
+//    @Autowired
+//    public void setRoomTypeService(RoomTypeService roomTypeService) {
+//        this.roomTypeService = roomTypeService;
+//    }
+//
+//    @Autowired
+//    public void setRoomService(RoomService roomService) {
+//        this.roomService = roomService;
+//    }
+//
+//    @Autowired
+//    public void setReviewsService(ReviewsService reviewsService) {
+//        this.reviewsService = reviewsService;
+//    }
 
-    @Autowired
-    public void setRoomService(RoomService roomService) {
-        this.roomService = roomService;
-    }
 
-    @Autowired
-    public void setReviewsService(ReviewsService reviewsService) {
-        this.reviewsService = reviewsService;
-    }
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
@@ -73,6 +83,26 @@ public class MainController {
 
     @GetMapping("/contact")
     public String contactPage(Model model) {
+        return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String postContactPage(@RequestParam(name="name", required=false, defaultValue="User") String name,
+                                  @RequestParam(name="score", required=false, defaultValue= "5") Short score,
+                                  @RequestParam(name="email", required=false) String email,
+                                  @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,Model model) {
+
+        for (HotelUser i: userService.getAllUser()){
+            if (i.getEmail().equals(email)){
+                Long userId =  i.getId();
+                String comment = message;
+                Short rating = score;
+                reviewsService.addReview(userId, comment, rating);
+
+                return "fragments/reviews";
+            }
+        }
+//        Нужно всплывающее окно == "Вы не жили у нас"
         return "contact";
     }
 
