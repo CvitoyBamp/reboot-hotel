@@ -8,6 +8,7 @@ import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.repository.room.RoomTypeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoomTypeService {
@@ -24,4 +25,5 @@ public class RoomTypeService {
     public List<RoomType> getAllRoomTypes() {
         return roomTypeRepository.findAll();
     }
+
 }
