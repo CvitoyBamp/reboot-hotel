@@ -14,6 +14,7 @@ import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
+import ru.reboot.hotel.service.user.HotelUserService;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -30,6 +31,8 @@ public class MainController {
     private PhotoStoreService photoStoreService;
 
     private ReviewsService reviewsService;
+
+    private HotelUserService hotelUserService;
 
     @Autowired
     public void setPhotoStoreService(PhotoStoreService photoStoreService) {
@@ -49,6 +52,11 @@ public class MainController {
     @Autowired
     public void setReviewsService(ReviewsService reviewsService) {
         this.reviewsService = reviewsService;
+    }
+
+    @Autowired
+    public void setHotelUserService(HotelUserService hotelUserService){
+        this.hotelUserService = hotelUserService;
     }
 
     @GetMapping("/index")
@@ -97,6 +105,11 @@ public class MainController {
     @GetMapping("/reviews")
     public String reviewsPage(Model model) {
         return "fragments/reviews";
+    }
+
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        return "register";
     }
 
 }
