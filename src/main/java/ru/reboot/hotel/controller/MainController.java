@@ -112,4 +112,9 @@ public class MainController {
         return "register";
     }
 
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        return "login";
+    }
+
 }

@@ -50,7 +50,11 @@ public class HotelWebSecurityConfig {
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                         //.anyRequest().denyAll()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/index")
+                        .permitAll())
                 .build();
     }
 
