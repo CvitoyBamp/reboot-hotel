@@ -39,4 +39,9 @@ public class RoomService {
         return roomRepository.findRoomsForReservationData(adults, kids);
     }
 
+    @Transactional(readOnly = true)
+    public List<Map<String, String>> getRoomsForReservation() {
+        return roomRepository.findRoomsForReservation();
+    }
+
 }

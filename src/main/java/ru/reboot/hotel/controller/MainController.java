@@ -4,10 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.reboot.hotel.entity.room.PhotoStore;
+import ru.reboot.hotel.entity.room.Room;
+import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.repository.reviews.ReviewsRepository;
 import ru.reboot.hotel.repository.room.PhotoStoreRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
@@ -16,7 +19,10 @@ import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -68,7 +74,18 @@ public class MainController {
 
     @GetMapping("/reservation")
     public String reservationPage(Model model) {
-        return "reservation";
+        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+
+        List<String> options = new ArrayList<String>();
+        for (int i = 0; i < roomService.getAllRooms().size(); i++) {
+            options.add(roomService.getRoomsForReservation().get(i).toString());
+
+        }
+        model.addAttribute("options", options);
+
+        model.addAttribute("reviews", reviewsService.getReviews());
+        return "reservation_from_scratch";
     }
 
     @GetMapping("/contact")
@@ -94,9 +111,28 @@ public class MainController {
         return "rooms";
     }
 
-    @GetMapping("/reviews")
+    @PostMapping("/reservation_result")
+    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData") LocalDate inData,
+                                                      @RequestParam(value = "outData") LocalDate outData,
+                                                      @RequestParam(value = "message") String message,
+                                                      @RequestParam(value = "name") String name,
+                                                      @RequestParam(value = "phone") String phone,
+                                                      @RequestParam(value = "email") String email,
+                                                      @RequestParam(value = "option") String option,
+                                                      Model model) {
+        return "reservation_result";
+    }
+
+    @GetMapping("/reservation_result")
+    public String reservationResult(Model model) {
+        return "reservation_result";
+    }
+
+
+
+    @GetMapping("/personalArea")
     public String reviewsPage(Model model) {
-        return "fragments/reviews";
+        return "register";
     }
 
 }
