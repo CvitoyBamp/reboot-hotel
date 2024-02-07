@@ -6,4 +6,5 @@ import ru.reboot.hotel.entity.user.HotelUser;
 
 @Repository
 public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
+
 }

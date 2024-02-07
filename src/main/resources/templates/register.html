@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Registration</title>
+    <title>Sber Hotel by team3</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,39 +36,41 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Регистрация</h1>
                             </div>
-                            <form class="user">
+                            <form action="#" method="post" class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        <input type="text" class="form-control form-control-user" name="name" id="name"
                                             placeholder="Имя">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Фамилия">
+                                        <input type="date" class="form-control form-control-user" name="birthday" id="birthday"
+                                            placeholder="Дата рождения">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="text" class="form-control form-control-user" name="phone" id="phone"
+                                           placeholder="Номер телефона">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" name="email" id="email"
                                         placeholder="Email">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Пароль">
+                                               name="password" id="password" placeholder="Пароль">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Повторить пароль">
+                                               name="repeatPassword"  id="repeatPassword" placeholder="Повторить пароль">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Зарегистрироваться
-                                </a>
+                                <input type="submit" value="Зарегистрироваться  "  class="btn btn-primary btn-user btn-block">
                                 <hr>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="login.html">Уже зарегистированы? Войдите!</a>
+                                <a class="small" href="login">Уже зарегистированы? Войдите!</a>
                             </div>
                         </div>
                     </div>

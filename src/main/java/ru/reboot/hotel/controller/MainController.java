@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.room.PhotoStore;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.room.RoomType;
@@ -21,6 +22,7 @@ import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
+import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.UserService;
 
 import java.time.LocalDate;
@@ -43,7 +45,14 @@ public class MainController {
 
     private ReviewsService reviewsService;
 
+    private HotelUserService hotelUserService;
+
     private UserService userService;
+
+    @Autowired
+    public void setHotelUserService(HotelUserService hotelUserService){
+        this.hotelUserService = hotelUserService;
+    }
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
@@ -142,6 +151,29 @@ public class MainController {
         return "reservation_result";
     }
 
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String loginPageAfterGettingDataFromRegister(@RequestParam(value = "name") String name,
+                                                        @RequestParam(value = "birthday") LocalDate birthday,
+                                                        @RequestParam(value = "phone") String phone,
+                                                        @RequestParam(value = "email") String email,
+                                                        @RequestParam(value = "password") String password,
+                                                        @RequestParam(value = "repeatPassword") String repeatPassword,
+                                                        Model model){
+            model.addAttribute("hotelUsers", hotelUserService.createHotelUser(new HotelUser( name,
+                                                                password, email, birthday, phone, new Roles("USER"))));
+        return "login";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        return "login";
+    }
+
     @GetMapping("/reservation_certain_room")
     public String reservationGetCertainRoom(Model model) {
         model.addAttribute("rooms", roomService.getFreeRooms());
@@ -160,4 +192,5 @@ public class MainController {
     public String register(Model model) {
         return "register";
     }
+
 }
