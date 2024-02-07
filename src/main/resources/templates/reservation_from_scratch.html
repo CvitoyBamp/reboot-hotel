@@ -87,45 +87,45 @@
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">Напишите Ваши имя и фамилию</label>
-                  <input type="text" id="name" class="form-control" th:value="${name}">
+                  <input type="text" id="name" name="name" class="form-control" th:value="${name}">
                 </div>
 
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">Укажите свой номер телефона</label>
-                  <input type="text" id="phone" class="form-control" th:value="${phone}">
+                  <input type="text" id="phone" name="phone" class="form-control" th:value="${phone}">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Укажите свой Email</label>
-                  <input type="email" id="email" class="form-control" th:value="${email}">
+                  <input type="email" id="email" name="email" class="form-control" th:value="${email}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Придумайте свой пароль</label>
-                  <input type="password" id="password" class="form-control" th:value="${password}">
+                  <input type="password" id="password" name="password" class="form-control" th:value="${password}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="birthday">Укажите дату вашего рождения</label>
-                  <input type="date" id="birthday" class="form-control" th:value="${birthday}">
+                  <input type="date" id="birthday" name="birthday" class="form-control" th:value="${birthday}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkin_date">Дата заселения</label>
-                  <input type="text" id="checkin_date" class="form-control" th:value="${inData}">
+                  <label class="text-black font-weight-bold" for="inData">Дата заселения</label>
+                  <input type="date" name="inData" id="inData" class="form-control" th:value="${inData}">
                 </div>
 
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkout_date">Дата отъезда</label>
-                  <input type="text" id="checkout_date" class="form-control" th:value="${outData}">
+                  <label class="text-black font-weight-bold" for="outData">Дата отъезда</label>
+                  <input type="date" id="outData" name="outData" class="form-control" th:value="${outData}">
                 </div>
               </div>
 

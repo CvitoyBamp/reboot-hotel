@@ -51,7 +51,7 @@ public class ReservationController {
                                                       @RequestParam(value = "name") String name,
                                                       @RequestParam(value = "phone") String phone,
                                                       @RequestParam(value = "email") String email,
-                                                      @RequestParam(value = "option") String option,
+                                                      @RequestParam(value = "room") String room,
                                                       Model model) {
         return "reservation_result";
     }
