@@ -75,39 +75,37 @@
     </section>
     <!-- END section -->
 
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-16 col-lg-16 mb-16" data-aos="fade-up">
+              <figure class="img-wrap">
+                <img th:src="${roomsType.get(rooms.values().toArray()[0]-1).getPhotoSRC()}" th:alt="${roomsType.get(rooms.values().toArray()[0]-1).getRoomName()}" class="img-fluid mb-3">
+              </figure>
+              <div class="p-3 text-center room-info">
+                <h2 th:text="${roomsType.get(rooms.values().toArray()[0]-1).getRoomName()}">Название номера</h2>
+                <span class="text-uppercase letter-spacing-1" th:text="${rooms.values().toArray()[3]} + '$/за ночь'">Цена за ночь</span>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
     <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
 
-            <div>
-              <p th:text="${result}">&ldquo;Comment&ldquo;</p>
-            </div>
-
             <form th:action="@{/reservation_result}" method="post" class="bg-white p-md-5 p-4 mb-5 border">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="name">Имя</label>
-                  <input type="text" id="name" class="form-control " th:value="${name}">
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phone">Телефон</label>
-                  <input type="text" id="phone" class="form-control " th:value="${phone}">
-                </div>
-              </div>
-          
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control " th:value="${email}">
-                </div>
-              </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">Дата заселения</label>
                   <input type="text" id="checkin_date" class="form-control" th:value="${inData}">
                 </div>
+
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">Дата отъезда</label>
                   <input type="text" id="checkout_date" class="form-control" th:value="${outData}">
@@ -117,9 +115,10 @@
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="message">Примечание</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:text="${note}"></textarea>
+                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:text="${message}"></textarea>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="submit" value="Зарезервировать сейчас  " class="btn btn-primary text-white py-3 px-5 font-weight-bold">
