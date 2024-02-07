@@ -81,7 +81,7 @@
 
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up"  th:each="room: ${rooms}">
-            <form th:action="@{/reservation_certain_room}" method="post">
+            <form th:action="@{/reservation/certain_room}" method="post">
               <figure class="img-wrap">
                 <img th:src="${roomsType.get(room.values().toArray()[1]-1).getPhotoSRC()}" th:alt="${roomsType.get(room.values().toArray()[1]-1).getRoomName()}" class="img-fluid mb-3">
               </figure>
