@@ -57,4 +57,12 @@ public class HotelUser extends AuditEntity {
     @OneToMany(mappedBy = "userId", targetEntity = Reviews.class)
     List<Reviews> reviewsList;
 
+    public HotelUser(String name, String password, String email, LocalDate birthday, String phone, Roles roles) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.roles = roles;
+    }
 }

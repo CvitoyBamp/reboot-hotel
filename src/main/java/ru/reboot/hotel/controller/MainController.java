@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.room.PhotoStore;
+import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.reviews.ReviewsRepository;
 import ru.reboot.hotel.repository.room.PhotoStoreRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
@@ -110,6 +112,19 @@ public class MainController {
     @GetMapping("/register")
     public String registerPage(Model model){
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String loginPageAfterGettingDataFromRegister(@RequestParam(value = "name") String name,
+                                                        @RequestParam(value = "birthday") LocalDate birthday,
+                                                        @RequestParam(value = "phone") String phone,
+                                                        @RequestParam(value = "email") String email,
+                                                        @RequestParam(value = "password") String password,
+                                                        @RequestParam(value = "repeatPassword") String repeatPassword,
+                                                        Model model){
+            model.addAttribute("hotelUsers", hotelUserService.createHotelUser(new HotelUser( name,
+                                                                password, email, birthday, phone, new Roles("USER"))));
+        return "login";
     }
 
     @GetMapping("/login")

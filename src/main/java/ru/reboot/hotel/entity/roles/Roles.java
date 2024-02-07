@@ -25,4 +25,7 @@ public class Roles extends AuditEntity {
     @Column(name = "role_name", columnDefinition = "VARCHAR(64) CHECK (role_name IN ('ADMIN', 'USER'))")
     String roleName;
 
+    public Roles(String roleName) {
+        this.roleName = roleName;
+    }
 }
