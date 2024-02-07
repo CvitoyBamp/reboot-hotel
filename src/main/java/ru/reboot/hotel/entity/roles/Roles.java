@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
 import ru.reboot.hotel.entity.AuditEntity;
+import ru.reboot.hotel.entity.user.HotelUser;
 
 import java.time.LocalDate;
 
@@ -25,7 +26,8 @@ public class Roles extends AuditEntity {
     @Column(name = "role_name", columnDefinition = "VARCHAR(64) CHECK (role_name IN ('ADMIN', 'USER'))")
     String roleName;
 
-    public Roles(String roleName) {
-        this.roleName = roleName;
-    }
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = HotelUser.class)
+    @JoinColumn(name = "id")
+    HotelUser hotelUser;
+
 }

@@ -164,8 +164,16 @@ public class MainController {
                                                         @RequestParam(value = "password") String password,
                                                         @RequestParam(value = "repeatPassword") String repeatPassword,
                                                         Model model){
-            model.addAttribute("hotelUsers", hotelUserService.createHotelUser(new HotelUser( name,
-                                                                password, email, birthday, phone, new Roles("USER"))));
+            model.addAttribute("hotelUsers", hotelUserService.createHotelUser(
+                    HotelUser.builder()
+                            .name(name)
+                            .phone(phone)
+                            .password(password)
+                            .email(email)
+                            .birthday(birthday)
+                            .roleId(1)
+                            .build()
+            ));
         return "login";
     }
 

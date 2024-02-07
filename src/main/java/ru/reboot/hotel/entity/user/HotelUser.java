@@ -1,9 +1,7 @@
 package ru.reboot.hotel.entity.user;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.reboot.hotel.entity.AuditEntity;
@@ -18,14 +16,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "public")
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HotelUser extends AuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
-    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq",  allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     Long id;
 
@@ -50,19 +50,10 @@ public class HotelUser extends AuditEntity {
     @Column(name = "phone", nullable = false)
     String phone;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    Roles roles;
+    @Column(name = "role_id", nullable = false)
+    Integer roleId;
 
     @OneToMany(mappedBy = "userId", targetEntity = Reviews.class)
     List<Reviews> reviewsList;
 
-    public HotelUser(String name, String password, String email, LocalDate birthday, String phone, Roles roles) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.birthday = birthday;
-        this.phone = phone;
-        this.roles = roles;
-    }
 }
