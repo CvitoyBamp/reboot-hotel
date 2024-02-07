@@ -23,7 +23,7 @@ public class Reviews extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviews_id_seq")
     @SequenceGenerator(name = "reviews_id_seq", sequenceName = "reviews_id_seq",  allocationSize=1)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
     @Column(name = "comment", nullable = false)
