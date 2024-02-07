@@ -138,13 +138,26 @@ public class MainController {
 
     @GetMapping("/reservation_result")
     public String reservationResult(Model model) {
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "reservation_result";
     }
 
+    @GetMapping("/reservation_certain_room")
+    public String reservationGetCertainRoom(Model model) {
+        model.addAttribute("rooms", roomService.getFreeRooms());
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+        return "reservation_certain_room";
+    }
 
+    @PostMapping("/reservation_certain_room")
+    public String reservationPostCertainRoom(@RequestParam(value = "checked_room_id") String id, Model model) {
+        model.addAttribute("rooms", roomService.getRoomByRoomId(id));
+        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+        return "reservation_certain_room";
+    }
 
     @GetMapping("/personalArea")
-    public String reviewsPage(Model model) {
+    public String register(Model model) {
         return "register";
     }
 }

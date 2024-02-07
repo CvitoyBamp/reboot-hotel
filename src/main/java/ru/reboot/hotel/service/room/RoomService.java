@@ -44,4 +44,9 @@ public class RoomService {
         return roomRepository.findRoomsForReservation();
     }
 
+    @Transactional(readOnly = true)
+    public Map<String, String> getRoomByRoomId(String roomId) {
+        return roomRepository.findRoomByRoomId(roomId);
+    }
+
 }
