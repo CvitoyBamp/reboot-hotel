@@ -19,6 +19,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.reboot.hotel.service.user.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -31,13 +32,7 @@ public class HotelWebSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.builder()
-                .username("admin")
-                .password(new BCryptPasswordEncoder().encode("123456"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+        return new CustomUserDetailsService();
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -46,14 +41,15 @@ public class HotelWebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         return http.authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                        //.anyRequest().denyAll()
+                                .requestMatchers("/user/**").hasRole("USER")
+                                .requestMatchers("/**").permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .usernameParameter("email")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/index")
+                        .failureForwardUrl("/register")
                         .permitAll())
                 .build();
     }

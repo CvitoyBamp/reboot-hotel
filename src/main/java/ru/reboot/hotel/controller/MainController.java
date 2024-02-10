@@ -1,39 +1,26 @@
 package ru.reboot.hotel.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.reboot.hotel.entity.roles.Roles;
-import ru.reboot.hotel.entity.room.PhotoStore;
-import ru.reboot.hotel.entity.room.Room;
-import ru.reboot.hotel.entity.room.RoomType;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.reboot.hotel.entity.user.HotelUser;
-import ru.reboot.hotel.repository.reviews.ReviewsRepository;
-import ru.reboot.hotel.repository.room.PhotoStoreRepository;
-import ru.reboot.hotel.repository.user.HotelUserRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
-import ru.reboot.hotel.service.user.HotelUserService;
-import ru.reboot.hotel.service.user.UserService;
+import ru.reboot.hotel.service.user.CustomUserDetailsService;
+import ru.reboot.hotel.utils.CustomUserDetails;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
 @Controller
 public class MainController {
 
@@ -45,9 +32,7 @@ public class MainController {
 
     private ReviewsService reviewsService;
 
-    private HotelUserService hotelUserService;
-
-    private UserService userService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @GetMapping("/")
     public String getMainPage() {
@@ -80,8 +65,8 @@ public class MainController {
                                   @RequestParam(name="email", required=false) String email,
                                   @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,
                                   Model model) {
-
-        for (HotelUser i: userService.getAllUser()){
+        model.addAttribute("reviews", reviewsService.getReviews());
+        for (HotelUser i: customUserDetailsService.getAllUsers()){
             if (i.getEmail().equals(email)){
                 Long userId =  i.getId();
                 reviewsService.addReview(userId, message, score);
@@ -102,6 +87,7 @@ public class MainController {
 
     @GetMapping("/reviews")
     public String reviewsPage(Model model) {
+        model.addAttribute("reviews", reviewsService.getReviews());
         return "fragments/reviews";
     }
 
@@ -118,27 +104,22 @@ public class MainController {
 
     @GetMapping("/register")
     public String registerPage(Model model){
+        model.addAttribute("hotelUser", new HotelUser());
         return "register";
     }
 
     @PostMapping("/register")
-    public String loginPageAfterGettingDataFromRegister(@RequestParam(value = "name") String name,
-                                                        @RequestParam(value = "birthday") LocalDate birthday,
-                                                        @RequestParam(value = "phone") String phone,
-                                                        @RequestParam(value = "email") String email,
-                                                        @RequestParam(value = "password") String password,
-                                                        @RequestParam(value = "repeatPassword") String repeatPassword,
+    public String loginPageAfterGettingDataFromRegister(@Valid @ModelAttribute("hotelUser")HotelUser hotelUser,
+                                                        BindingResult result,
                                                         Model model){
-            model.addAttribute("hotelUsers", hotelUserService.createHotelUser(
-                    HotelUser.builder()
-                            .name(name)
-                            .phone(phone)
-                            .password(password)
-                            .email(email)
-                            .birthday(birthday)
-                            .roleId(1)
-                            .build()
-            ));
+        if (result.hasErrors()) {
+            log.error(result.getAllErrors().toString());
+            model.addAttribute("hotelUser", hotelUser);
+            return "register";
+        }
+
+        hotelUser.setRoleId(2);
+        customUserDetailsService.createHotelUser(hotelUser);
         return "login";
     }
 

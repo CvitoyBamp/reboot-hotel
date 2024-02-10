@@ -1,5 +1,6 @@
 package ru.reboot.hotel.service.room;
 
+import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,14 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class RoomTypeService {
 
     private RoomTypeRepository roomTypeRepository;
-
-    @Autowired
-    public void setRoomTypeRepository(RoomTypeRepository roomTypeRepository) {
-        this.roomTypeRepository = roomTypeRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<RoomType> getAllRoomTypes() {
