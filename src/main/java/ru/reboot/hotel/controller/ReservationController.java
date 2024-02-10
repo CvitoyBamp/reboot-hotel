@@ -28,7 +28,7 @@ public class ReservationController {
     private RoomTypeService roomTypeService;
 
     private ReviewsService reviewsService;
-    @GetMapping("/")
+    @GetMapping
     public String reservationPage(Model model) {
         model.addAttribute("rooms", roomService.getAllRooms());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());

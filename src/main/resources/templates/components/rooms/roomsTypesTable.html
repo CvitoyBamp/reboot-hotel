@@ -1,0 +1,56 @@
+<div class="table-responsive">
+    <form hx-post="/admin/rooms/type/create"
+          hx-swap="none"
+          id="newRoomType">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Название номера</th>
+                <th>Описание</th>
+                <th>Кол-во взрослых</th>
+                <th>Кол-во детей</th>
+                <th>Фото</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>
+                    <input type="text" id="roomName" name="roomName">
+                </th>
+                <th>
+                    <input type="text" id="description" name="description">
+                </th>
+                <th>
+                    <input type="number" id="maxAdults" name="maxAdults">
+                </th>
+                <th>
+                    <input type="number" id="maxChildren" name="maxChildren">
+                </th>
+                <th>
+                    <input type="text" id="photoSRC" name="photoSRC">
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить" form="newRoomType">
+                        <i class="fas fa-indent"></i>
+                    </button>
+                </th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr th:each="rt: ${roomsType}">
+                <td th:text="${rt.getRoomName()}">Название номера</td>
+                <td th:text="${rt.getDescription()}">Описание</td>
+                <td th:text="${rt.getMaxAdults()}">Кол-во взрослых</td>
+                <td th:text="${rt.getMaxChildren()}">Кол-во детей</td>
+                <td><img th:src="${rt.getPhotoSRC()}" width="200px" /></td>
+                <td>
+                    <a th:hx-post="@{/admin/rooms/type/delete/{id}(id=${rt.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

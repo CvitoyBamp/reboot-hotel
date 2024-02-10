@@ -49,9 +49,9 @@ public class MainController {
 
     private UserService userService;
 
-    @Autowired
-    public void setHotelUserService(HotelUserService hotelUserService){
-        this.hotelUserService = hotelUserService;
+    @GetMapping("/")
+    public String getMainPage() {
+        return "redirect:/index";
     }
 
     @GetMapping("/index")
@@ -78,14 +78,13 @@ public class MainController {
     public String postContactPage(@RequestParam(name="name", required=false, defaultValue="User") String name,
                                   @RequestParam(name="score", required=false, defaultValue= "5") Short score,
                                   @RequestParam(name="email", required=false) String email,
-                                  @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,Model model) {
+                                  @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,
+                                  Model model) {
 
         for (HotelUser i: userService.getAllUser()){
             if (i.getEmail().equals(email)){
                 Long userId =  i.getId();
-                String comment = message;
-                Short rating = score;
-                reviewsService.addReview(userId, comment, rating);
+                reviewsService.addReview(userId, message, score);
 
                 return "fragments/reviews";
             }

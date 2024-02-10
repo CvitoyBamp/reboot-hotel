@@ -24,9 +24,8 @@ import java.util.Set;
 public class RoomType extends AuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_type_id_seq")
-    @SequenceGenerator(name = "room_type_id_seq", sequenceName = "room_type_id_seq",  allocationSize=1)
-    @Column(name = "id", nullable = false, insertable=false, updatable=false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable=false)
     Long id;
 
     @Column(name = "room_name", nullable = false)
@@ -41,9 +40,9 @@ public class RoomType extends AuditEntity {
     @Column(name = "max_children", nullable = false)
     Short maxChildren;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "adds")
-    Additional adds;
+//    @JdbcTypeCode(SqlTypes.JSON)
+//    @Column(name = "adds")
+//    Additional adds;
 
     @Column(name = "photo_src")
     String photoSRC;
