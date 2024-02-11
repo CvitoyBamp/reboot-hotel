@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 
 @Slf4j
 @Controller
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
 @RequestMapping("/admin/rooms")
 public class RoomsController {
 
@@ -25,6 +26,28 @@ public class RoomsController {
     public String getRoomsInspector(Model model) {
         model.addAttribute("rooms", roomService.getAllRooms());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+        return "rooms_admin";
+    }
+
+    @GetMapping("/table")
+    @HxRequest
+    public String getRoomsTable(Model model) {
+        model.addAttribute("rooms", roomService.getAllRooms());
+        return "rooms_admin";
+    }
+
+    @PostMapping("/table/create")
+    @HxTrigger("createRoom")
+    @HxRequest
+    public String createRoom(@ModelAttribute Room room) {
+        roomService.createNewRoom(room);
+        return "rooms_admin";
+    }
+    @PostMapping("/table/delete/{id}")
+    @HxTrigger("deleteRoom")
+    @HxRequest
+    public String deleteRoom(@PathVariable String id) {
+        roomService.deleteRoomById(id);
         return "rooms_admin";
     }
 

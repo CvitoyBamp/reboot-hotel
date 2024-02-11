@@ -1,0 +1,45 @@
+<div class="table-responsive">
+    <form hx-post="/admin/rooms/create"
+          hx-swap="none"
+          id="newRoom">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Тип номера</th>
+                <th>Цена за день</th>
+                <th>Номер занят?</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>
+                    <input type="number" id="roomTypeId" name="roomTypeId">
+                </th>
+                <th>
+                    <input type="number" id="pricePerDay" name="pricePerDay">
+                </th>
+                <th>
+                    <input type="checkbox" checked="checked" id="isLocked" name="isLocked">
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить" form="newRoom">
+                        <i class="fas fa-indent"></i>
+                    </button>
+                </th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr th:each="rm: ${rooms}">
+                <td th:text="${rm.getRoomTypeId}">Тип номера</td>
+                <td th:text="${rm.getLocked()}">Цена за день</td>
+                <td th:text="${rm.getPricePerDay()}">Номер занят?</td>
+                <td>
+                    <a th:hx-post="@{/admin/rooms/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

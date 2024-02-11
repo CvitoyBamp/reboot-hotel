@@ -3,6 +3,7 @@ package ru.reboot.hotel.service.user;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,12 +19,13 @@ import java.util.List;
 @Slf4j
 @Service
 @AllArgsConstructor
-@NoArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private HotelUserRepository hotelUserRepository;
 
     private PasswordEncoder passwordEncoder;
+
+    private RoleService roleService;
 
     @Transactional
     public void createHotelUser(HotelUser hotelUser){
@@ -34,11 +36,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        log.info(email);
-        var cd = (CustomUserDetails) hotelUserRepository.findCustomUserDetailsByEmail(email)
+        HotelUser hotelUser = hotelUserRepository.findCustomUserDetailsByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User don't found"));
-        log.info(cd.toString());
-        return cd;
+
+        return new CustomUserDetails(hotelUser, roleService);
     }
 
     @Transactional(readOnly = true)

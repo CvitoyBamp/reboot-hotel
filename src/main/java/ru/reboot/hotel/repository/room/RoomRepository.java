@@ -26,4 +26,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query("SELECT new map(r.id as room_id, r.pricePerDay as price, rt.roomName, rt.description) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.id = :roomId order by r.id")
     Map<String, String> findRoomByRoomId(@Param("roomId") String roomId);
+
+    void deleteRoomById(Long id);
 }

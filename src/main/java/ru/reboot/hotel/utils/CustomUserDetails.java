@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +22,11 @@ import java.util.stream.Collectors;
 
 @Component
 @Data
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
-public class CustomUserDetails extends HotelUser implements UserDetails {
+@AllArgsConstructor
+public class CustomUserDetails implements UserDetails {
+
+    private HotelUser hotelUser;
 
     private RoleService roleService;
 
@@ -34,8 +36,13 @@ public class CustomUserDetails extends HotelUser implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return hotelUser.getPassword();
+    }
+
+    @Override
     public String getUsername() {
-        return super.getName();
+        return hotelUser.getName();
     }
 
     @Override

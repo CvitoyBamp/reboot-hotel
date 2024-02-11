@@ -55,48 +55,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Название номера</th>
-                                        <th>Цена за сутки</th>
-                                        <th>Кол-во взрослых</th>
-                                        <th>Кол-во детей</th>
-                                        <th>Фото</th>
-                                        <th>Удобства</th>
-                                        <th>Действия</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Название номера</th>
-                                        <th>Цена за сутки</th>
-                                        <th>Кол-во взрослых</th>
-                                        <th>Кол-во детей</th>
-                                        <th>Фото</th>
-                                        <th>Удобства</th>
-                                        <th>Действия</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                <tr th:each="room: ${rooms}">
-                                    <td th:text="${roomsType.get(room.getRoomTypeId()-1).getRoomName()}">Название номера</td>
-                                    <td th:text="${room.getPricePerDay()}">Цена за сутки</td>
-                                    <td th:text="${roomsType.get(room.getRoomTypeId()-1).getMaxAdults()}">Кол-во взрослых</td>
-                                    <td th:text="${roomsType.get(room.getRoomTypeId()-1).getMaxChildren()}">Кол-во детей</td>
-                                    <td><img th:src="${roomsType.get(room.getRoomTypeId()-1).getPhotoSRC()}" width="200px" /></td>
-                                    <td><span class="badge badge-info">холодильник</span>, <span class="badge badge-warning">кондиционер</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div hx-trigger="load,createRoom,deleteRoom" hx-get="/admin/rooms/table">
                         </div>
                     </div>
                 </div>

@@ -46,4 +46,14 @@ public class RoomService {
         return roomRepository.findRoomByRoomId(roomId);
     }
 
+    @Transactional
+    public void createNewRoom(Room room) {
+        roomRepository.save(room);
+    }
+
+    @Transactional
+    public void deleteRoomById(String id) {
+        roomRepository.deleteRoomById(Long.valueOf(id));
+    }
+
 }

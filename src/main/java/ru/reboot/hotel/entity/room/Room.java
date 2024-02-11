@@ -27,8 +27,7 @@ import java.util.Set;
 public class Room extends AuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_id_seq")
-    @SequenceGenerator(name = "room_id_seq", sequenceName = "room_id_seq",  allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
@@ -44,5 +43,4 @@ public class Room extends AuditEntity {
 
     @Column(name = "room_type_id", nullable = false)
     Long roomTypeId;
-
 }

@@ -125,6 +125,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String loginPage(Model model){
+        log.info("here");
         return "login";
     }
 
