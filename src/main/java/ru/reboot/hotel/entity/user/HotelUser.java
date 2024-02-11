@@ -21,38 +21,47 @@ import java.util.List;
 @Entity
 @Table(name = "user", schema = "public")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HotelUser extends AuditEntity {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     Long id;
 
+    @EqualsAndHashCode.Include
     @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "name", nullable = false, length = 128)
     String name;
 
+    @EqualsAndHashCode.Include
     @NotEmpty(message = "Пароль не может быть пустым")
     @Column(name = "password", nullable = false)
     String password;
 
+    @EqualsAndHashCode.Include
     @NotBlank(message = "Заполните имеил")
     @Email
     @Column(name = "email", nullable = false, length = 320)
     String email;
 
+    @EqualsAndHashCode.Include
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday", nullable = false)
     LocalDate birthday;
 
+    @EqualsAndHashCode.Include
     @NotNull
     @Pattern(regexp = "^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$")
     @Max(12)
     @Column(name = "phone", nullable = false)
     String phone;
 
+    @EqualsAndHashCode.Include
     @NotNull
     @Column(name = "role_id", nullable = false)
     Integer roleId;

@@ -54,9 +54,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Номера</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <div hx-trigger="load,createRoom,deleteRoom" hx-get="/admin/rooms/table">
-                        </div>
+                        <div hx-trigger="load,createRoom,deleteRoom" hx-get="/admin/rooms/table">
                     </div>
                 </div>
 
@@ -101,6 +99,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -115,6 +114,7 @@
 <!-- Page level plugins -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js" integrity="sha512-OQlawZneA7zzfI6B1n1tjUuo3C5mtYuAWpQdg+iI9mkDoo7iFzTqnQHf+K5ThOWNJ9AbXL4+ZDwH7ykySPQc+A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Page level custom scripts -->
+<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/demo/datatables-demo.js}"></script>
 <script type="text/javascript" th:src="@{/js/include_components.js}"></script>
 

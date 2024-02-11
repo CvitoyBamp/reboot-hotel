@@ -31,8 +31,8 @@
             <tbody>
             <tr th:each="rm: ${rooms}">
                 <td th:text="${rm.getRoomTypeId}">Тип номера</td>
-                <td th:text="${rm.getLocked()}">Цена за день</td>
-                <td th:text="${rm.getPricePerDay()}">Номер занят?</td>
+                <td th:text="${rm.getPricePerDay()}">Цена за день</td>
+                <td th:text="${rm.getIsLocked()}">Номер занят?</td>
                 <td>
                     <a th:hx-post="@{/admin/rooms/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
                         <i class="fas fa-trash"></i>

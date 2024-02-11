@@ -33,7 +33,7 @@ public class RoomsController {
     @HxRequest
     public String getRoomsTable(Model model) {
         model.addAttribute("rooms", roomService.getAllRooms());
-        return "rooms_admin";
+        return "components/rooms/roomsTable";
     }
 
     @PostMapping("/table/create")
