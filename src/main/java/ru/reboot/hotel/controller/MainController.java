@@ -1,31 +1,26 @@
 package ru.reboot.hotel.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.reboot.hotel.entity.room.PhotoStore;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.reboot.hotel.entity.user.HotelUser;
-import ru.reboot.hotel.repository.reviews.ReviewsRepository;
-import ru.reboot.hotel.repository.room.PhotoStoreRepository;
-import ru.reboot.hotel.repository.user.HotelUserRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
-import ru.reboot.hotel.service.user.UserService;
+import ru.reboot.hotel.service.user.CustomUserDetailsService;
+import ru.reboot.hotel.utils.CustomUserDetails;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Slf4j
+@AllArgsConstructor
 @Controller
 public class MainController {
 
@@ -37,29 +32,12 @@ public class MainController {
 
     private ReviewsService reviewsService;
 
-    private UserService userService;
+    private CustomUserDetailsService customUserDetailsService;
 
-//    @Autowired
-//    public void setPhotoStoreService(PhotoStoreService photoStoreService) {
-//        this.photoStoreService = photoStoreService;
-//    }
-//
-//    @Autowired
-//    public void setRoomTypeService(RoomTypeService roomTypeService) {
-//        this.roomTypeService = roomTypeService;
-//    }
-//
-//    @Autowired
-//    public void setRoomService(RoomService roomService) {
-//        this.roomService = roomService;
-//    }
-//
-//    @Autowired
-//    public void setReviewsService(ReviewsService reviewsService) {
-//        this.reviewsService = reviewsService;
-//    }
-
-
+    @GetMapping("/")
+    public String getMainPage() {
+        return "redirect:/index";
+    }
 
     @GetMapping("/index")
     public String getRoomsPage(Model model) {
@@ -76,14 +54,8 @@ public class MainController {
         return "about";
     }
 
-    @GetMapping("/reservation")
-    public String reservationPage(Model model) {
-        return "reservation";
-    }
-
     @GetMapping("/contact")
     public String contactPage(Model model) {
-        model.addAttribute("reviews", reviewsService.getReviews());
         return "contact";
     }
 
@@ -91,16 +63,15 @@ public class MainController {
     public String postContactPage(@RequestParam(name="name", required=false, defaultValue="User") String name,
                                   @RequestParam(name="score", required=false, defaultValue= "5") Short score,
                                   @RequestParam(name="email", required=false) String email,
-                                  @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,Model model) {
-        for (HotelUser i: userService.getAllUser()){
+                                  @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,
+                                  Model model) {
+        model.addAttribute("reviews", reviewsService.getReviews());
+        for (HotelUser i: customUserDetailsService.getAllUsers()){
             if (i.getEmail().equals(email)){
                 Long userId =  i.getId();
-                String comment = message;
-                Short rating = score;
-                reviewsService.addReview(userId, comment, rating);
+                reviewsService.addReview(userId, message, score);
 
-                model.addAttribute("reviews", reviewsService.getReviews());
-                return "contact";
+                return "fragments/reviews";
             }
         }
 //        Нужно всплывающее окно == "Вы не жили у нас"
@@ -114,6 +85,12 @@ public class MainController {
         return "rooms";
     }
 
+    @GetMapping("/reviews")
+    public String reviewsPage(Model model) {
+        model.addAttribute("reviews", reviewsService.getReviews());
+        return "fragments/reviews";
+    }
+
     @PostMapping("/checkFreeData")
     public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData", required = false) LocalDate inData,
                                                       @RequestParam(value = "outData", required = false) LocalDate outData,
@@ -125,9 +102,36 @@ public class MainController {
         return "rooms";
     }
 
-    @GetMapping("/reviews")
-    public String reviewsPage(Model model) {
-        return "fragments/reviews";
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        model.addAttribute("hotelUser", new HotelUser());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String loginPageAfterGettingDataFromRegister(@Valid @ModelAttribute("hotelUser")HotelUser hotelUser,
+                                                        BindingResult result,
+                                                        Model model){
+        if (result.hasErrors()) {
+            log.error(result.getAllErrors().toString());
+            model.addAttribute("hotelUser", hotelUser);
+            return "register";
+        }
+
+        hotelUser.setRoleId(2);
+        customUserDetailsService.createHotelUser(hotelUser);
+        return "login";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        log.info("here");
+        return "login";
+    }
+
+    @GetMapping("/personalArea")
+    public String register(Model model) {
+        return "register";
     }
 
 }

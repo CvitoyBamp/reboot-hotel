@@ -20,4 +20,6 @@ insert into public.user values ('4', '2','Виктор','03.04.1976','123456','v
 insert into public.user values ('5', '2','Игорь','18.09.1987','123456','шпщк@нф.com','89011974269');
 
 
+truncate table PUBLIC.USER cascade ;
+
 drop table public.user cascade ;

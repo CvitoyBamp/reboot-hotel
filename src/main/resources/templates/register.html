@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Sber Hotel by team3</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link   type="text/css"
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/sb-admin-2.min.css}">
 
 </head>
 
@@ -36,39 +34,48 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Регистрация</h1>
                             </div>
-                            <form class="user">
+                            <form th:action="@{/register}" method="post" class="user" th:object="${hotelUser}">
+                                <div th:replace="~{fragments/errors.html :: fielderrors}"></div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Имя">
+                                        <input type="text" class="form-control form-control-user"
+                                            placeholder="Имя" th:field="*{name}">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Фамилия">
+                                        <input type="date" class="form-control form-control-user"
+                                            placeholder="Дата рождения" th:field="*{birthday}">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email">
+                                    <input type="text" class="form-control form-control-user"
+                                           placeholder="Номер телефона" th:field="*{phone}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user"
+                                        placeholder="Email" th:field="*{email}">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Пароль">
+                                               placeholder="Пароль" th:field="*{password}">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Повторить пароль">
+                                               placeholder="Повторить пароль">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Зарегистрироваться
-                                </a>
+                                <input type="submit" value="Зарегистрироваться"  class="btn btn-primary btn-user btn-block">
+                                <hr>
+                                <div th:if="${#fields.hasAnyErrors()}">
+                                    <ul>
+                                        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                                    </ul>
+                                </div>
                                 <hr>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="login.html">Уже зарегистированы? Войдите!</a>
+                                <a class="small" th:href="@{/login}">Уже зарегистированы? Войдите!</a>
                             </div>
                         </div>
                     </div>

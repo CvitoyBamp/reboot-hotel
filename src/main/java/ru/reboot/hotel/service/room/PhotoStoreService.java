@@ -1,5 +1,6 @@
 package ru.reboot.hotel.service.room;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class PhotoStoreService {
 
     private PhotoStoreRepository photoStoreRepository;
-
-    @Autowired
-    public void setPhotoStoreRepository(PhotoStoreRepository photoStoreRepository) {
-        this.photoStoreRepository = photoStoreRepository;
-    }
 
     @Cacheable("photos")
     @Transactional(readOnly = true)
