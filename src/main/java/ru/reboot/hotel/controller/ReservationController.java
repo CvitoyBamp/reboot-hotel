@@ -5,17 +5,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import ru.reboot.hotel.entity.booking.Booking;
+import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,29 +34,21 @@ public class ReservationController {
     private ReviewsService reviewsService;
     @GetMapping
     public String reservationPage(Model model) {
-        model.addAttribute("rooms", roomService.getAllRooms());
+        model.addAttribute("booking", new Booking());
+        model.addAttribute("rooms", roomService.getRoomsForReservation());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
-
-        List<String> options = new ArrayList<String>();
-        for (int i = 0; i < roomService.getAllRooms().size(); i++) {
-            options.add(roomService.getRoomsForReservation().get(i).toString());
-
-        }
-        model.addAttribute("options", options);
 
         model.addAttribute("reviews", reviewsService.getReviews());
         return "reservation_from_scratch";
     }
 
     @PostMapping("/result")
-    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData") LocalDate inData,
-                                                      @RequestParam(value = "outData") LocalDate outData,
-                                                      @RequestParam(value = "message") String message,
-                                                      @RequestParam(value = "name") String name,
-                                                      @RequestParam(value = "phone") String phone,
-                                                      @RequestParam(value = "email") String email,
-                                                      @RequestParam(value = "room") String room,
+    public String roomsPageAfterGettingDataFromClient(@Valid @ModelAttribute("booking") Booking booking,
+                                                      BindingResult result,
                                                       Model model) {
+        if (result.hasErrors()) {
+            log.error("Error while get booking data: {}", result.getGlobalError());
+        }
         return "reservation_result";
     }
 

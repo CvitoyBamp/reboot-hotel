@@ -1,9 +1,7 @@
 package ru.reboot.hotel.entity.reviews;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.room.Room;
@@ -16,19 +14,24 @@ import java.util.Set;
 @Entity
 @Table(name = "reviews", schema = "public")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Reviews extends AuditEntity {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviews_id_seq")
     @SequenceGenerator(name = "reviews_id_seq", sequenceName = "reviews_id_seq",  allocationSize=1)
     @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
+    @EqualsAndHashCode.Include
     @Column(name = "comment", nullable = false)
     String comment;
 
+    @EqualsAndHashCode.Include
     @Column(name = "rating", columnDefinition = "SMALLINT CHECK (RATING BETWEEN 1 AND 5)")
     Short rating;
 
@@ -36,6 +39,7 @@ public class Reviews extends AuditEntity {
 //    @JoinColumn(name = "user_id")
 //    HotelUser hotelUserId;
 
+    @EqualsAndHashCode.Include
     @Column(name = "user_id", nullable = false)
     Long userId;
 
