@@ -1,14 +1,13 @@
 package ru.reboot.hotel.entity.reviews;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.user.HotelUser;
 
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "reviews", schema = "public")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Reviews extends AuditEntity {

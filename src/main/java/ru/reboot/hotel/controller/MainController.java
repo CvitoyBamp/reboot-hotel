@@ -54,8 +54,10 @@ public class MainController {
         return "about";
     }
 
+
     @GetMapping("/contact")
     public String contactPage(Model model) {
+        model.addAttribute("reviews", reviewsService.getReviews());
         return "contact";
     }
 
@@ -131,6 +133,7 @@ public class MainController {
 
     @GetMapping("/personalArea")
     public String register(Model model) {
+        model.addAttribute("hotelUser", new HotelUser());
         return "register";
     }
 
