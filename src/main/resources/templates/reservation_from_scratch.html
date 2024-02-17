@@ -83,57 +83,57 @@
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
 
-            <form th:action="@{/reservation/result}" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form th:action="@{/reservation/result}" method="post" class="bg-white p-md-5 p-4 mb-5 border" th:object="${booking}" id="booking">
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="name">Напишите Ваши имя и фамилию</label>
-                  <input type="text" id="name" name="name" class="form-control" th:value="${name}">
+                  <label class="text-black font-weight-bold" for="name">Напишите Ваше имя</label>
+                  <input type="text" id="name" name="name" class="form-control" th:field="*{userId.name}">
                 </div>
 
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">Укажите свой номер телефона</label>
-                  <input type="text" id="phone" name="phone" class="form-control" th:value="${phone}">
+                  <input type="text" id="phone" name="phone" class="form-control" th:field="*{userId.phone}">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Укажите свой Email</label>
-                  <input type="email" id="email" name="email" class="form-control" th:value="${email}">
+                  <input type="email" id="email" name="email" class="form-control" th:field="*{userId.email}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Придумайте свой пароль</label>
-                  <input type="password" id="password" name="password" class="form-control" th:value="${password}">
+                  <input type="password" id="password" name="password" class="form-control" th:field="*{userId.password}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="birthday">Укажите дату вашего рождения</label>
-                  <input type="date" id="birthday" name="birthday" class="form-control" th:value="${birthday}">
+                  <input type="date" id="birthday" name="birthday" class="form-control" th:field="*{userId.birthday}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="inData">Дата заселения</label>
-                  <input type="date" name="inData" id="inData" class="form-control" th:value="${inData}">
+                  <input type="date" name="inData" id="inData" class="form-control" th:field="*{startDate}">
                 </div>
 
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="outData">Дата отъезда</label>
-                  <input type="date" id="outData" name="outData" class="form-control" th:value="${outData}">
+                  <input type="date" id="outData" name="outData" class="form-control" th:field="*{endDate}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="room">Выберите номер для бронирования</label>
-                  <select name="room" id="room" class="form-control">
-                    <option th:each="option : ${options}" th:value="${option}" th:text="${option}"></option>
+                  <label class="text-black font-weight-bold" for="roomsId">Выберите номер для бронирования</label>
+                  <select name="roomsId" id="roomsId" class="form-control" th:field="*{roomsId}">
+                    <option th:each="room : ${rooms}" th:value="${room.values().toArray()[0]}" th:text="${room.values().toArray()[2]}"></option>
                   </select>
                 </div>
               </div>
@@ -141,13 +141,13 @@
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="message">Примечание</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:text="${message}"></textarea>
+                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:text="${message}" th:field="*{note}"></textarea>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="submit" value="Зарезервировать сейчас  " class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  <button type="submit" value="Зарезервировать сейчас" class="btn btn-primary text-white py-3 px-5 font-weight-bold" form="booking"></button>
                 </div>
               </div>
             </form>

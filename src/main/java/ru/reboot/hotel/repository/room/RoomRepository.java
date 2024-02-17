@@ -21,7 +21,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query("SELECT new map(r.roomTypeId as room_type_id, MIN(r.pricePerDay) as price) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.isLocked = false and rt.maxAdults >= :adults and rt.maxChildren >= :kids GROUP BY r.roomTypeId order by r.roomTypeId")
     List<Map<String, String>> findRoomsForReservationData(@Param("adults") int adults, @Param("kids") int kids);
 
-    @Query("SELECT new map(r.id as room_id, r.pricePerDay as price, rt.roomName, rt.description) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.isLocked = false order by r.pricePerDay")
+    @Query("SELECT new map(r.id as room_id, rt.roomName as roomName, rt.description as description, min(r.pricePerDay) as price) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.isLocked = false GROUP BY r.id, rt.roomName, rt.description order by r.pricePerDay")
     List<Map<String, String>> findRoomsForReservation();
 
     @Query("SELECT new map(r.id as room_id, r.pricePerDay as price, rt.roomName, rt.description) FROM Room r join RoomType rt on r.roomTypeId = rt.id where r.id = :roomId order by r.id")
