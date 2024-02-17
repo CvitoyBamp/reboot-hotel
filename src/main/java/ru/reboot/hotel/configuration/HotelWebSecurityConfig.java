@@ -18,27 +18,47 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import ru.reboot.hotel.repository.user.HotelUserRepository;
+import ru.reboot.hotel.repository.user.RolesRepository;
 import ru.reboot.hotel.service.user.CustomUserDetailsService;
+import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
 
+/**
+ * Config for Spring security
+ */
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
 public class HotelWebSecurityConfig {
 
-    private HotelUserRepository hotelUserRepository;
+    private HotelUserService hotelUserService;
 
     private RoleService roleService;
 
+    /**
+     * Create Bean for encoding password
+     * @return bcrypt encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Custom UserDetailsService realisation for Spring Security
+     * @return CustomUserDetailsService for checking login
+     */
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(hotelUserRepository, passwordEncoder(), roleService);
+        return new CustomUserDetailsService(hotelUserService, roleService);
     }
+
+    /**
+     * Defines a filter chain which is capable of being matched against an {@code HttpSecurity}
+     * @param http - HttpSecurity object for filtering requests
+     * @return chain of http filters
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -46,7 +66,8 @@ public class HotelWebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         return http.authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/admin/**").authenticated()
+                                .requestMatchers("/register/**").anonymous()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .requestMatchers("/**").permitAll()
                 )
@@ -61,6 +82,10 @@ public class HotelWebSecurityConfig {
                 .build();
     }
 
+    /**
+     * Defines an authentication provider.
+     * @return Authenticates a user with the given request.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

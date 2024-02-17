@@ -1,4 +1,4 @@
-package ru.reboot.hotel.utils;
+package ru.reboot.hotel.utils.security;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,7 @@ import ru.reboot.hotel.service.user.RoleService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,11 +29,11 @@ public class CustomUserDetails implements UserDetails {
 
     private HotelUser hotelUser;
 
-    private RoleService roleService;
+    private Set<GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roleService.getRoles();
+        return authorities;
     }
 
     @Override

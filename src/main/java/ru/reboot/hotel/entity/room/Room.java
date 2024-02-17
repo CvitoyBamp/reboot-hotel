@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "room", schema = "public")
+@Table(name = "room")
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -31,16 +31,21 @@ public class Room extends AuditEntity {
     @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
+    @NonNull
     @Column(name = "price_per_day", nullable = false)
     BigDecimal pricePerDay;
 
+    @NonNull
     @Column(name = "is_locked", nullable = false)
     Boolean isLocked;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "room_type_id", referencedColumnName = "id")
-//    RoomType roomTypeId;
+    @NonNull
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoomType.class)
+    RoomType roomType;
 
-    @Column(name = "room_type_id", nullable = false)
-    Long roomTypeId;
+    @Transient
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, mappedBy = "room")
+    Booking booking;
+
 }

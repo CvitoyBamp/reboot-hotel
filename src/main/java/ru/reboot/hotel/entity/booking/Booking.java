@@ -11,9 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "booking", schema = "public")
+@Table(name = "booking")
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -25,25 +25,28 @@ public class Booking extends AuditEntity {
     @Column(name = "id", nullable = false)
     Long id;
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    HotelUser userId;
+    @NonNull
+    @EqualsAndHashCode.Include
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = HotelUser.class)
+    HotelUser hotelUser;
 
-    @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY,
+    @NonNull
+    @EqualsAndHashCode.Include
+    @OneToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @Column(name = "room_id", nullable = false)
-    Set<Room> roomsId = new HashSet<>();
+    Room room;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "start_date", nullable = false)
     LocalDate startDate;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "end_date", nullable = false)
     LocalDate endDate;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "note", nullable = false)
     String note;

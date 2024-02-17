@@ -13,6 +13,9 @@ import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 
+/**
+ * Controller for rooms controlling by admin
+ */
 @Slf4j
 @Controller
 @AllArgsConstructor

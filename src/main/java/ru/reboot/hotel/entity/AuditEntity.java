@@ -1,5 +1,6 @@
 package ru.reboot.hotel.entity;
 
+import jakarta.persistence.*;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
@@ -18,8 +19,10 @@ import java.time.LocalDate;
 public class AuditEntity {
 
     @CreatedDate
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
     LocalDate rowInsertTimestamp;
 
     @LastModifiedDate
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     LocalDate updInsertTimestamp;
 }

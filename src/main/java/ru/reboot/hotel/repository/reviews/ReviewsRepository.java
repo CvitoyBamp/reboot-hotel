@@ -11,6 +11,6 @@ import java.util.Map;
 @Repository
 public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
 
-    @Query(value = "SELECT new map(U.name as name, R.comment as comment) FROM Reviews R JOIN HotelUser U ON R.userId = U.id WHERE R.rating >= 4 ORDER BY R.updInsertTimestamp DESC LIMIT 3")
+    @Query(value = "SELECT new map(u.name as name, r.comment as comment) from Reviews as r join r.hotelUser as u where r.rating >= 4 order by r.updInsertTimestamp desc limit 3")
     List<Map<String, String>> getReviewsTextAndUsernameOrderByUpdInsertTimestampDescLimit();
 }

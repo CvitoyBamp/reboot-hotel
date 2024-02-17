@@ -1,51 +1,44 @@
 package ru.reboot.hotel.service.user;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.user.HotelUserRepository;
-import ru.reboot.hotel.utils.CustomUserDetails;
+import ru.reboot.hotel.utils.security.CustomUserDetails;
+import ru.reboot.hotel.utils.security.SecurityUtil;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private HotelUserRepository hotelUserRepository;
-
-    private PasswordEncoder passwordEncoder;
-
+    private HotelUserService hotelUserService;
     private RoleService roleService;
-
-    @Transactional
-    public void createHotelUser(HotelUser hotelUser){
-        hotelUser.setPassword(passwordEncoder.encode(hotelUser.getPassword()));
-        hotelUserRepository.save(hotelUser);
-    }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        HotelUser hotelUser = hotelUserRepository.findCustomUserDetailsByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User don't found"));
+        HotelUser hotelUser = hotelUserService.findHotelUserByEmail(email);
 
-        return new CustomUserDetails(hotelUser, roleService);
+        Set<GrantedAuthority> authorities = roleService.getRoles().stream().
+                map(roles -> SecurityUtil.convertToAuthority(roles.getRoleName()))
+                .collect(Collectors.toSet());
+
+        return new CustomUserDetails(hotelUser, authorities);
+
     }
-
-    @Transactional(readOnly = true)
-    public List<HotelUser> getAllUsers() {
-        return hotelUserRepository.findAll();
-    }
-
-
 }

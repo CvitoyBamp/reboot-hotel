@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "room_type", schema = "public")
+@Table(name = "room_type")
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,29 +29,31 @@ public class RoomType extends AuditEntity {
     @Column(name = "id", nullable = false, updatable=false)
     Long id;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "room_name", nullable = false)
     String roomName;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "description", nullable = false)
     String description;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "max_adults", nullable = false)
     Short maxAdults;
 
+    @NonNull
     @Column(name = "max_children", nullable = false)
     Short maxChildren;
 
-//    @JdbcTypeCode(SqlTypes.JSON)
-//    @Column(name = "adds")
-//    Additional adds;
-
+    @NonNull
     @Column(name = "photo_src")
     String photoSRC;
 
-    @OneToMany(mappedBy = "roomTypeId", targetEntity = Room.class)
+    @Transient
+    @OneToMany(mappedBy = "roomType", targetEntity = Room.class)
     List<Room> rooms;
 
 }

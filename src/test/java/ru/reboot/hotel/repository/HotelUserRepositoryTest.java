@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.jdbc.Sql;
+import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.user.HotelUserRepository;
 
@@ -22,9 +24,12 @@ import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql(scripts = "classpath:/updateSequence.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 public class HotelUserRepositoryTest {
 
     HotelUser hotelUser;
+
+    Roles role;
 
     @Autowired
     HotelUserRepository hotelUserRepository;
@@ -33,7 +38,8 @@ public class HotelUserRepositoryTest {
     TestEntityManager testEntityManager;
     @BeforeEach
     void initHotelUser() {
-        hotelUser = new HotelUser(1000L, "Test", new BCryptPasswordEncoder().encode("123456"), "test@bk.ru", LocalDate.of(1997, 3, 13), "80001001010",1, Collections.EMPTY_LIST);
+        role = new Roles("USER");
+        hotelUser = new HotelUser("Test", new BCryptPasswordEncoder().encode("123456"), "test@bk.ru", LocalDate.of(1997, 3, 13), "80001001010", role);
     }
 
     @AfterEach
@@ -45,13 +51,13 @@ public class HotelUserRepositoryTest {
     @DisplayName("Find hotel user by email")
     void findUserByEmail() {
         hotelUserRepository.save(hotelUser);
-        assertThat(testEntityManager.find(HotelUser.class, hotelUser.getId())).isEqualTo(hotelUserRepository.findCustomUserDetailsByEmail(hotelUser.getEmail()).get());
+        assertThat(testEntityManager.find(HotelUser.class, hotelUser.getId())).isEqualTo(hotelUserRepository.findHotelUsersByEmail(hotelUser.getEmail()).get());
     }
 
     @Test
     @DisplayName("No user with such email")
     void cantFindUserByEmail() {
-        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> hotelUserRepository.findCustomUserDetailsByEmail("noExistTest@ya.ru").orElseThrow());
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> hotelUserRepository.findHotelUsersByEmail("noExistTest@ya.ru").orElseThrow());
     }
 
     @Test

@@ -3,11 +3,16 @@ package ru.reboot.hotel.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.reboot.hotel.configuration.HotelWebSecurityConfig;
@@ -18,48 +23,50 @@ import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 import ru.reboot.hotel.service.user.CustomUserDetailsService;
+import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
 
-@WebMvcTest
-@ContextConfiguration(classes=
-        {
-                AdminController.class,
-                MainController.class,
-                RoomsController.class,
-                ReservationController.class,
-                HotelWebSecurityConfig.class
-        })
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+        classes = {MainController.class, AdminController.class, ReservationController.class, RoomsController.class})
+@AutoConfigureMockMvc
 public class ControllerTest {
     /**
      * Unit-тесты для слоя Controller
      */
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @MockBean
-    private RoomService service;
+    RoomService service;
 
     @MockBean
-    private RoomTypeService roomTypeService;
+    RoomTypeService roomTypeService;
 
     @MockBean
-    private PhotoStoreService photoStoreService;
+    PhotoStoreService photoStoreService;
 
     @MockBean
-    private ReviewsService reviewsService;
+    ReviewsService reviewsService;
 
     @MockBean
-    private BookingService bookingService;
+    BookingService bookingService;
 
     @MockBean
-    private CustomUserDetailsService customUserDetailsService;
+    CustomUserDetailsService customUserDetailsService;
 
     @MockBean
-    private RoleService roleService;
+    RoleService roleService;
 
     @MockBean
-    private HotelUserRepository hotelUserRepository;
+    HotelUserService hotelUserService;
+
+    @MockBean
+    PasswordEncoder passwordEncoder;
+
+    @MockBean
+    ObjectMapper objectMapper;
 
     @Test
     @DisplayName("Check '/' page")
@@ -106,15 +113,14 @@ public class ControllerTest {
     void checkAboutPage() throws Exception {
         mockMvc.perform(get("/about"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"));
+                .andExpect(view().name("about"));
     }
 
     @Test
     @DisplayName("Check 'Reservation' page")
     void checkReservationPage() throws Exception {
         mockMvc.perform(get("/reservation"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"));
+                .andExpect(view().name("reservation_from_scratch"));
     }
 
     @Test
@@ -152,7 +158,7 @@ public class ControllerTest {
     void checkRegisterPage() throws Exception {
         mockMvc.perform(get("/register"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"));
+                .andExpect(view().name("register"));
     }
 
 }

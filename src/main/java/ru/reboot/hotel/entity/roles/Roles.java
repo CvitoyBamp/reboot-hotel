@@ -7,32 +7,33 @@ import org.springframework.security.core.GrantedAuthority;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.user.HotelUser;
 
+import javax.validation.constraints.NotNull;
+import java.util.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "roles", schema = "public")
+@Table(name = "roles")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Roles extends AuditEntity implements GrantedAuthority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roles_id_seq")
-    @SequenceGenerator(name = "roles_id_seq", sequenceName = "roles_id_seq",  allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Column(name = "id", nullable = false)
     Long id;
 
+    @NonNull
     @EqualsAndHashCode.Include
     @Column(name = "role_name", columnDefinition = "VARCHAR(64) CHECK (role_name IN ('ADMIN', 'USER'))")
     String roleName;
 
-    @EqualsAndHashCode.Include
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = HotelUser.class)
-    @JoinColumn(name = "id")
-    HotelUser hotelUser;
+    @Transient
+    @OneToMany(mappedBy = "roles", targetEntity = HotelUser.class)
+    Set<HotelUser> hotelUsers;
 
     @Override
     public String getAuthority() {

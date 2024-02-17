@@ -21,8 +21,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Controller for booking by user
+ */
 @Slf4j
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
 @RequestMapping("/reservation")
 @Controller
 public class ReservationController {

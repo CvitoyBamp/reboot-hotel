@@ -2,23 +2,30 @@ package ru.reboot.hotel.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 import ru.reboot.hotel.service.user.CustomUserDetailsService;
-import ru.reboot.hotel.utils.CustomUserDetails;
+import ru.reboot.hotel.service.user.HotelUserService;
+import ru.reboot.hotel.service.user.RoleService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Main controller for registration/login and landing page
+ */
 @Slf4j
 @AllArgsConstructor
 @Controller
@@ -32,7 +39,11 @@ public class MainController {
 
     private ReviewsService reviewsService;
 
-    private CustomUserDetailsService customUserDetailsService;
+    private HotelUserService hotelUserService;
+
+    private RoleService roleService;
+
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String getMainPage() {
@@ -68,11 +79,9 @@ public class MainController {
                                   @RequestParam(name="message", required=false, defaultValue="Отличный сервис") String message,
                                   Model model) {
         model.addAttribute("reviews", reviewsService.getReviews());
-        for (HotelUser i: customUserDetailsService.getAllUsers()){
+        for (HotelUser i: hotelUserService.getAllUsers()){
             if (i.getEmail().equals(email)){
-                Long userId =  i.getId();
-                reviewsService.addReview(userId, message, score);
-
+                reviewsService.addReview(i, message, score);
                 return "fragments/reviews";
             }
         }
@@ -111,7 +120,7 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String loginPageAfterGettingDataFromRegister(@Valid @ModelAttribute("hotelUser")HotelUser hotelUser,
+    public String loginPageAfterGettingDataFromRegister(@ModelAttribute("hotelUser") @Valid HotelUser hotelUser,
                                                         BindingResult result,
                                                         Model model){
         if (result.hasErrors()) {
@@ -119,9 +128,10 @@ public class MainController {
             model.addAttribute("hotelUser", hotelUser);
             return "register";
         }
-
-        hotelUser.setRoleId(2);
-        customUserDetailsService.createHotelUser(hotelUser);
+        hotelUser.setRoles(roleService.getRoles().get(1));
+        hotelUser.setPassword(passwordEncoder.encode(hotelUser.getPassword()));
+        log.info(hotelUser.toString());
+        hotelUserService.createHotelUser(hotelUser);
         return "login";
     }
 

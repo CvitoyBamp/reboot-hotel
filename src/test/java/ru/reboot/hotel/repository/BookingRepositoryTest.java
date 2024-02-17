@@ -9,9 +9,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.jdbc.Sql;
 import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.room.Room;
+import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.booking.BookingRepository;
 import ru.reboot.hotel.repository.user.RolesRepository;
@@ -26,12 +28,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql(scripts = "classpath:/updateSequence.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 public class BookingRepositoryTest {
     Booking booking;
 
     HotelUser hotelUser;
 
     Room room;
+
+    RoomType roomType;
 
     Set<Room> rooms = new HashSet<>();
 
@@ -42,17 +47,19 @@ public class BookingRepositoryTest {
     TestEntityManager testEntityManager;
     @BeforeEach
     void initRole() {
-        room = new Room(100L, BigDecimal.valueOf(150), false, 100L);
-        rooms.add(room);
-        hotelUser = new HotelUser(1000L, "Test", new BCryptPasswordEncoder().encode("123456"), "test@bk.ru", LocalDate.of(1997, 3, 13), "80001001010",1, Collections.EMPTY_LIST);
-        booking = new Booking(100L, hotelUser, rooms, LocalDate.now(), LocalDate.now(), "");
+        roomType = new RoomType("Luks", "Super-puper", (short) 1, (short) 1, "");
+        room = new Room(BigDecimal.valueOf(150), false,roomType);
+        hotelUser = new HotelUser("Test", new BCryptPasswordEncoder().encode("123456"), "test@bk.ru", LocalDate.of(1997, 3, 13), "80001001010", new Roles("USER"));
+        booking = new Booking(hotelUser, room, LocalDate.now(), LocalDate.now(), "");
     }
 
     @AfterEach
     void deleteBooking() {
+        testEntityManager.detach(roomType);
+        testEntityManager.detach(hotelUser);
         testEntityManager.detach(booking);
         testEntityManager.detach(room);
-        testEntityManager.detach(hotelUser);
+
     }
 
     @Test

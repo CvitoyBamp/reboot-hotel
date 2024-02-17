@@ -87,33 +87,33 @@
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">Напишите Ваше имя</label>
-                  <input type="text" id="name" name="name" class="form-control" th:field="*{userId.name}">
+                  <input type="text" id="name" name="name" class="form-control" th:field="*{hotelUser.name}">
                 </div>
 
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">Укажите свой номер телефона</label>
-                  <input type="text" id="phone" name="phone" class="form-control" th:field="*{userId.phone}">
+                  <input type="text" id="phone" name="phone" class="form-control" th:field="*{hotelUser.phone}">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Укажите свой Email</label>
-                  <input type="email" id="email" name="email" class="form-control" th:field="*{userId.email}">
+                  <input type="email" id="email" name="email" class="form-control" th:field="*{hotelUser.email}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Придумайте свой пароль</label>
-                  <input type="password" id="password" name="password" class="form-control" th:field="*{userId.password}">
+                  <input type="password" id="password" name="password" class="form-control" th:field="*{hotelUser.password}">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="birthday">Укажите дату вашего рождения</label>
-                  <input type="date" id="birthday" name="birthday" class="form-control" th:field="*{userId.birthday}">
+                  <input type="date" id="birthday" name="birthday" class="form-control" th:field="*{hotelUser.birthday}">
                 </div>
               </div>
 
@@ -132,7 +132,7 @@
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="roomsId">Выберите номер для бронирования</label>
-                  <select name="roomsId" id="roomsId" class="form-control" th:field="*{roomsId}">
+                  <select name="roomsId" id="roomsId" class="form-control" th:field="*{room}">
                     <option th:each="room : ${rooms}" th:value="${room.values().toArray()[0]}" th:text="${room.values().toArray()[2]}"></option>
                   </select>
                 </div>

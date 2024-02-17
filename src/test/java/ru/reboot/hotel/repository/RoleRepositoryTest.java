@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.jdbc.Sql;
 import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.user.HotelUserRepository;
@@ -23,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql(scripts = "classpath:/updateSequence.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 public class RoleRepositoryTest {
 
     Roles role;
@@ -34,7 +36,7 @@ public class RoleRepositoryTest {
     TestEntityManager testEntityManager;
     @BeforeEach
     void initRole() {
-        role = new Roles(100L, "USER", new HotelUser(1000L, "Test", new BCryptPasswordEncoder().encode("123456"), "test@bk.ru", LocalDate.of(1997, 3, 13), "80001001010",1, Collections.EMPTY_LIST));
+        role = new Roles("USER");
     }
 
     @AfterEach

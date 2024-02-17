@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import ru.reboot.hotel.entity.AuditEntity;
 
 @Entity
-@Table(name = "photo_store", schema = "public")
+@Table(name = "photo_store")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
