@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<header>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+</header>
 <body>
 <div th:fragment="menu">
     <div class="site-navbar js-site-navbar">
@@ -10,7 +13,9 @@
                         <ul class="list-unstyled menu">
                             <li class="active"><a th:href="@{/index}">Главная</a></li>
                             <li><a th:href="@{/rooms}">Номера</a></li>
-                            <li><a th:href="@{/reservation}">Бронирование</a></li>
+                            <form th:action="@{/checkFreeData}" method="post" id="reserv">
+                                <li><a onclick="document.getElementById('reserv').submit();">Бронирование</a></li>
+                            </form>
                             <li><a th:href="@{/personalArea}">Личный кабинет</a></li>
                             <li><a th:href="@{/contact}">Контакты</a></li>
                             <li><a th:href="@{/about}">О нас</a></li>

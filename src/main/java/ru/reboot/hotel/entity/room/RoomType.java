@@ -45,10 +45,12 @@ public class RoomType extends AuditEntity {
     Short maxAdults;
 
     @NonNull
+    @EqualsAndHashCode.Include
     @Column(name = "max_children", nullable = false)
     Short maxChildren;
 
     @NonNull
+    @EqualsAndHashCode.Include
     @Column(name = "photo_src")
     String photoSRC;
 

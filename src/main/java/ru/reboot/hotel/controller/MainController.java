@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.reviews.ReviewsService;
@@ -105,8 +106,8 @@ public class MainController {
     @PostMapping("/checkFreeData")
     public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData", required = false) LocalDate inData,
                                                       @RequestParam(value = "outData", required = false) LocalDate outData,
-                                                      @RequestParam(value = "adults") Integer adults,
-                                                      @RequestParam(value = "kids") Integer kids,
+                                                      @RequestParam(value = "adults", defaultValue = "0") Integer adults,
+                                                      @RequestParam(value = "kids", defaultValue = "0") Integer kids,
                                                       Model model) {
         model.addAttribute("rooms", roomService.getRoomsAfterGettingData(adults, kids));
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
@@ -126,8 +127,9 @@ public class MainController {
         if (result.hasErrors()) {
             log.error(result.getAllErrors().toString());
             model.addAttribute("hotelUser", hotelUser);
-            return "register";
+            return "redirect:/register?error=true";
         }
+
         hotelUser.setRoles(roleService.getRoles().get(1));
         hotelUser.setPassword(passwordEncoder.encode(hotelUser.getPassword()));
         log.info(hotelUser.toString());
@@ -137,7 +139,6 @@ public class MainController {
 
     @GetMapping("/login")
     public String loginPage(Model model){
-        log.info("here");
         return "login";
     }
 

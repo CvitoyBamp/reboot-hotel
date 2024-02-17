@@ -28,7 +28,7 @@
     <!-- Theme Style -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
   </head>
-  <body>
+  <body th:object="${booking}">
     
     <header class="site-header js-site-header">
       <div class="container-fluid">
@@ -80,11 +80,11 @@
         <div class="row">
           <div class="col-md-16 col-lg-16 mb-16" data-aos="fade-up">
               <figure class="img-wrap">
-                <img th:src="${roomsType.get(rooms.values().toArray()[0]-1).getPhotoSRC()}" th:alt="${roomsType.get(rooms.values().toArray()[0]-1).getRoomName()}" class="img-fluid mb-3">
+                <img th:src="${roomsType.get(booking.getRoom().getRoomType().getId()-1).getPhotoSRC()}" th:alt="${roomsType.get(booking.getRoom().getRoomType().getId()-1).getRoomName()}" class="img-fluid mb-3">
               </figure>
               <div class="p-3 text-center room-info">
-                <h2 th:text="${roomsType.get(rooms.values().toArray()[0]-1).getRoomName()}">Название номера</h2>
-                <span class="text-uppercase letter-spacing-1" th:text="${rooms.values().toArray()[3]} + '$/за ночь'">Цена за ночь</span>
+                <h2 th:text="${roomsType.get(booking.getRoom().getRoomType().getId()-1).getRoomName()}">Название номера</h2>
+                <span class="text-uppercase letter-spacing-1" th:text="${booking.getRoom().getPricePerDay()} + '$/за ночь'">Цена за ночь</span>
               </div>
           </div>
         </div>
@@ -97,31 +97,36 @@
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-
+            <div th:if="${param.error}">
+              <div class="ml-3">
+                <div class="mt-2 text-sm text-red-700">
+                  <p>Неверные даты, бронирование не может быть за вчерашние дни.</p>
+                </div>
+              </div>
+            </div>
             <form th:action="@{/reservation/result}" method="post" class="bg-white p-md-5 p-4 mb-5 border">
-
               <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkin_date">Дата заселения</label>
-                  <input type="text" id="checkin_date" class="form-control" th:value="${inData}">
+                <div class="col-md-6">
+                  <label class="text-black font-weight-bold">Дата заселения</label>
+                  <input type="date" placeholder="Дата заезда" th:field="*{startDate}">
                 </div>
 
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkout_date">Дата отъезда</label>
-                  <input type="text" id="checkout_date" class="form-control" th:value="${outData}">
+                <div class="col-md-6">
+                  <label class="text-black font-weight-bold">Дата отъезда</label>
+                  <input type="date" placeholder="Дата отъезда" th:field="*{endDate}">
                 </div>
               </div>
 
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="message">Примечание</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:text="${message}"></textarea>
+                  <textarea name="message" id="message" class="form-control " cols="30" rows="8" th:field="*{note}"></textarea>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="submit" value="Зарезервировать сейчас  " class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  <input type="submit" value="Зарезервировать сейчас" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                 </div>
               </div>
             </form>

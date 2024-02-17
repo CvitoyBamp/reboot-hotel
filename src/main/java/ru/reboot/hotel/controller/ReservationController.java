@@ -1,17 +1,23 @@
 package ru.reboot.hotel.controller;
 
+import jakarta.annotation.security.RolesAllowed;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.user.HotelUser;
+import ru.reboot.hotel.service.booking.BookingService;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
+import ru.reboot.hotel.utils.security.CustomUserDetails;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -26,51 +32,52 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/reservation")
 @Controller
+@SessionAttributes(names = {"booking", "id"})
 public class ReservationController {
 
-    private RoomService roomService;
+    RoomService roomService;
 
-    private RoomTypeService roomTypeService;
+    RoomTypeService roomTypeService;
 
-    private ReviewsService reviewsService;
-    @GetMapping
-    public String reservationPage(Model model) {
-        model.addAttribute("booking", new Booking());
-        model.addAttribute("rooms", roomService.getRoomsForReservation());
-        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
+    ReviewsService reviewsService;
 
-        model.addAttribute("reviews", reviewsService.getReviews());
-        return "reservation_from_scratch";
-    }
+    BookingService bookingService;
 
     @PostMapping("/result")
-    public String roomsPageAfterGettingDataFromClient(@Valid @ModelAttribute("booking") Booking booking,
+    public String roomsPageAfterGettingDataFromClient(@ModelAttribute("booking") @Valid Booking booking,
                                                       BindingResult result,
                                                       Model model) {
+        log.info(booking.toString());
         if (result.hasErrors()) {
             log.error("Error while get booking data: {}", result.getGlobalError());
         }
-        return "reservation_result";
-    }
 
-    @GetMapping("/result")
-    public String reservationResult(Model model) {
-        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
-        return "reservation_result";
-    }
+        if (booking.getStartDate().isBefore(LocalDate.now())
+                || booking.getEndDate().isBefore(LocalDate.now())
+                || booking.getEndDate().isBefore(booking.getStartDate())) {
+            return "redirect:/certain_room?error=date?checked_room_id={id}";
+        }
 
-    @GetMapping("/certain_room")
-    public String reservationGetCertainRoom(Model model) {
-        model.addAttribute("rooms", roomService.getFreeRooms());
-        model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
-        return "reservation_certain_room";
+        bookingService.saveBooking(booking);
+        roomService.updateRoomStatus(booking.getRoom().getId());
+
+        return "reservation_result";
     }
 
     @PostMapping("/certain_room")
-    public String reservationPostCertainRoom(@RequestParam(value = "checked_room_id") String id, Model model) {
-        model.addAttribute("rooms", roomService.getRoomByRoomId(id));
+    public String reservationPostCertainRoom(@RequestParam(value = "checked_room_id") String id,
+                                             Authentication authentication,
+                                             Model model) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        log.info(customUserDetails.toString());
+        Booking booking = new Booking();
+        booking.setHotelUser(customUserDetails.getHotelUser());
+        booking.setRoom(roomService.getRoomByRoomId(id));
+        model.addAttribute("booking", booking);
+        model.addAttribute("reviews", reviewsService.getReviews());
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "reservation_certain_room";
     }

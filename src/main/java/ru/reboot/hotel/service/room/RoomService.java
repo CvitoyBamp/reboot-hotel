@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.repository.room.RoomRepository;
 
@@ -42,8 +43,8 @@ public class RoomService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, String> getRoomByRoomId(String roomId) {
-        return roomRepository.findRoomByRoomId(roomId);
+    public Room getRoomByRoomId(String roomId) {
+        return roomRepository.findRoomsById(Long.valueOf(roomId));
     }
 
     @Transactional
@@ -54,6 +55,11 @@ public class RoomService {
     @Transactional
     public void deleteRoomById(String id) {
         roomRepository.deleteRoomById(Long.valueOf(id));
+    }
+
+    @Transactional
+    public void updateRoomStatus(Long id) {
+        roomRepository.setIsLockedToRoomByBooking(id);
     }
 
 }

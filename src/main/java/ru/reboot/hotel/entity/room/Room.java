@@ -22,24 +22,28 @@ import java.util.Set;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Room extends AuditEntity {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false, insertable=false, updatable=false)
     Long id;
 
     @NonNull
+    @EqualsAndHashCode.Include
     @Column(name = "price_per_day", nullable = false)
     BigDecimal pricePerDay;
 
     @NonNull
+    @EqualsAndHashCode.Include
     @Column(name = "is_locked", nullable = false)
     Boolean isLocked;
 
     @NonNull
+    @EqualsAndHashCode.Include
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoomType.class)
     RoomType roomType;
 

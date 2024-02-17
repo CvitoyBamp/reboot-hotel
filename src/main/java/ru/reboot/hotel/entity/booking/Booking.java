@@ -27,13 +27,12 @@ public class Booking extends AuditEntity {
 
     @NonNull
     @EqualsAndHashCode.Include
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = HotelUser.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = HotelUser.class)
     HotelUser hotelUser;
 
     @NonNull
     @EqualsAndHashCode.Include
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = Room.class)
     Room room;
 
     @NonNull
