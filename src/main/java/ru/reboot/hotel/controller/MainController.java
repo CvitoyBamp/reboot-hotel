@@ -9,33 +9,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import ru.reboot.hotel.entity.booking.Booking;
-import ru.reboot.hotel.entity.roles.Roles;
-import ru.reboot.hotel.entity.room.Room;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.booking.BookingService;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
-import ru.reboot.hotel.service.user.CustomUserDetailsService;
 import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
-
 import javax.validation.Valid;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * Main controller for registration/login and landing page
  */
+
 @Slf4j
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)

@@ -1,16 +1,17 @@
 package ru.reboot.hotel.service.room;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.repository.room.RoomRepository;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service RoomService. For RoomRepository
+ */
 @Service
 @AllArgsConstructor
 public class RoomService {

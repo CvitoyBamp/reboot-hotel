@@ -1,18 +1,17 @@
 package ru.reboot.hotel.repository.room;
 
-import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.room.Room;
-import ru.reboot.hotel.entity.room.RoomType;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Repository RoomRepository. Table name = "room"
+ */
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 

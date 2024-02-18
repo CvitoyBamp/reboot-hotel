@@ -1,22 +1,14 @@
 package ru.reboot.hotel.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.reboot.hotel.configuration.HotelWebSecurityConfig;
-import ru.reboot.hotel.repository.user.HotelUserRepository;
 import ru.reboot.hotel.service.booking.BookingService;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
@@ -25,6 +17,9 @@ import ru.reboot.hotel.service.room.RoomTypeService;
 import ru.reboot.hotel.service.user.CustomUserDetailsService;
 import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
