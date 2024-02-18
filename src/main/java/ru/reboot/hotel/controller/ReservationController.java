@@ -1,18 +1,15 @@
 package ru.reboot.hotel.controller;
 
-import jakarta.annotation.security.RolesAllowed;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.reboot.hotel.entity.booking.Booking;
-import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.service.booking.BookingService;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.RoomService;
@@ -21,15 +18,11 @@ import ru.reboot.hotel.utils.security.CustomUserDetails;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Controller for booking by user
  */
+
 @Slf4j
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)

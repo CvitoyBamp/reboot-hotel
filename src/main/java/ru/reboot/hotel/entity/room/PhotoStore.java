@@ -5,6 +5,9 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.reboot.hotel.entity.AuditEntity;
 
+/**
+ * Entity PhotoStore for Table name = "photo_store"
+ */
 @Entity
 @Table(name = "photo_store")
 @Data

@@ -13,12 +13,12 @@ import ru.reboot.hotel.entity.roles.Roles;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.reviews.ReviewsRepository;
 import ru.reboot.hotel.service.reviews.ReviewsService;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @Slf4j
 @DataJpaTest
 @AutoConfigureDataJpa

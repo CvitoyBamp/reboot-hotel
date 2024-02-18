@@ -9,6 +9,9 @@ import ru.reboot.hotel.entity.booking.Booking;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Repository BookingRepository. Table name = "booking"
+ */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
