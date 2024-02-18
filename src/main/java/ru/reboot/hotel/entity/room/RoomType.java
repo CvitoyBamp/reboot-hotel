@@ -3,17 +3,13 @@ package ru.reboot.hotel.entity.room;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 import ru.reboot.hotel.entity.AuditEntity;
-import ru.reboot.hotel.entity.booking.Booking;
-import ru.reboot.hotel.entity.reviews.Reviews;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * Entity RoomType for Table name = "room_type"
+ */
 @Entity
 @Table(name = "room_type")
 @Data

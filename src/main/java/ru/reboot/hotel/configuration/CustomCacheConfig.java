@@ -7,8 +7,11 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import java.util.List;
 
-import java.util.Arrays;
+/**
+ * Enable caching
+ */
 
 @Configuration
 @EnableCaching
@@ -18,8 +21,7 @@ public class CustomCacheConfig {
     @Bean
     public CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(Arrays.asList(
-                new ConcurrentMapCache("roomType"),
+        cacheManager.setCaches(List.of(
                 new ConcurrentMapCache("photos")));
         return cacheManager;
     }

@@ -24,11 +24,11 @@ insert into PUBLIC.ROOM(id, room_type_id, price_per_day, is_locked) values ('4',
 insert into PUBLIC.ROOM(id, room_type_id, price_per_day, is_locked) values ('5', '1', '100', 'false');
 
 -- Пользователи
-insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('1', '2','Василий','03.04.2000','123$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2456','vasya@ya.ru','89001234569');
-insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('2', '2','Мария','05.10.1993','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','masha@google.com','89011234569');
-insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('3', '2','Виктор','03.04.1976','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','vitya@yahoo.com','89011274569');
-insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('4', '2','Игорь','09.08.1987','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','шпщк@нф.com','89011974269');
-insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('5', '1','admin','09.09.1987','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','admin@admin.ru','89091586789');
+insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('1', '2','Василий','2000-03-14','123$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2456','vasya@ya.ru','89001234569');
+insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('2', '2','Мария','1993-05-10','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','masha@google.com','89011234569');
+insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('3', '2','Виктор','1976-03-04','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','vitya@yahoo.com','89011274569');
+insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('4', '2','Игорь','1987-09-18','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','шпщк@нф.com','89011974269');
+insert into public.user(id, roles_id, name, birthday, password, email, phone) values ('5', '1','admin','1987-09-19','$2a$10$ZI3IFWvl02PrSyCZ3orysesMZKGA2pD.FGjzRHQYrBlrTJYk914V2','admin@admin.ru','89091586789');
 
 -- Отзывы
 insert into public.reviews(id, hotel_user_id, comment, rating) values ('1', '2', 'Очень понравился номер', '5');

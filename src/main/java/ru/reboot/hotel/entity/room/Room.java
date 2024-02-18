@@ -1,22 +1,16 @@
 package ru.reboot.hotel.entity.room;
 
-import io.hypersistence.utils.hibernate.type.array.ListArrayType;
-import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.booking.Booking;
-import ru.reboot.hotel.entity.roles.Roles;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+/**
+ * Entity Room for Table name = "room"
+ */
 @Entity
 @Table(name = "room")
 @Data

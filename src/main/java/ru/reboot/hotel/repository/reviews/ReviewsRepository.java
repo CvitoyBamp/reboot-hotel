@@ -9,6 +9,9 @@ import ru.reboot.hotel.entity.user.HotelUser;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Repository ReviewsRepository. Table name = "reviews"
+ */
 @Repository
 public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
 

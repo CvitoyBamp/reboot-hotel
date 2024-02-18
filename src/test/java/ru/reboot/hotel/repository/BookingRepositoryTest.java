@@ -16,15 +16,12 @@ import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.booking.BookingRepository;
-import ru.reboot.hotel.repository.user.RolesRepository;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

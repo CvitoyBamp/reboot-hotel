@@ -11,7 +11,11 @@ import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.user.HotelUserService;
 
 import java.time.LocalDate;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Admin controller for registration/login and landing page
+ */
 @Slf4j
 @Controller
 @AllArgsConstructor(onConstructor = @__(@Autowired))

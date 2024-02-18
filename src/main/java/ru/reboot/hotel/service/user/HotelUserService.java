@@ -1,7 +1,6 @@
 package ru.reboot.hotel.service.user;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,8 +11,11 @@ import ru.reboot.hotel.repository.user.HotelUserRepository;
 import ru.reboot.hotel.repository.user.RolesRepository;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
+/**
+ * Service HotelUserService. For HotelUserRepository
+ */
 @Service
 @AllArgsConstructor
 public class HotelUserService {

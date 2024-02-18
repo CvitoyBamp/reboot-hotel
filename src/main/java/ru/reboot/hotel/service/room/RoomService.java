@@ -1,16 +1,17 @@
 package ru.reboot.hotel.service.room;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.repository.room.RoomRepository;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service RoomService. For RoomRepository
+ */
 @Service
 @AllArgsConstructor
 public class RoomService {
@@ -38,13 +39,13 @@ public class RoomService {
     }
 
     @Transactional(readOnly = true)
-    public List<Map<String, String>> getRoomsForReservation() {
-        return roomRepository.findRoomsForReservation();
+    public Room getRoomByRoomId(String roomId) {
+        return roomRepository.findRoomsById(Long.valueOf(roomId));
     }
 
     @Transactional(readOnly = true)
-    public Room getRoomByRoomId(String roomId) {
-        return roomRepository.findRoomsById(Long.valueOf(roomId));
+    public List<Map<String, String>> findRoomsWhereIdNotInList(List<Long> ids, int adult, int child) {
+        return roomRepository.findRoomsByIdNotInAndAdultAndChildrenIn(ids, adult, child);
     }
 
     @Transactional
@@ -55,11 +56,6 @@ public class RoomService {
     @Transactional
     public void deleteRoomById(String id) {
         roomRepository.deleteRoomById(Long.valueOf(id));
-    }
-
-    @Transactional
-    public void updateRoomStatus(Long id) {
-        roomRepository.setIsLockedToRoomByBooking(id);
     }
 
 }
