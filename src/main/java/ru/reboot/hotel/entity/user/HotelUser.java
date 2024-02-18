@@ -4,14 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import ru.reboot.hotel.entity.AuditEntity;
 import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.reviews.Reviews;
 import ru.reboot.hotel.entity.roles.Roles;
-import ru.reboot.hotel.utils.annotations.ValidLogin;
-
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -73,6 +69,14 @@ public class HotelUser extends AuditEntity {
     @OneToMany(mappedBy = "hotelUser", targetEntity = Booking.class)
     Set<Booking> bookings;
 
+    public HotelUser(Long id, @NonNull String name, @NonNull String email, @NonNull LocalDate birthday, @NonNull String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birthday = birthday;
+        this.phone = phone;
+    }
+
     public Long getId() {
         return id;
     }
@@ -108,4 +112,5 @@ public class HotelUser extends AuditEntity {
     public Set<Booking> getBookings() {
         return bookings;
     }
+
 }

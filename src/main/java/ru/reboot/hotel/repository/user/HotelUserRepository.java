@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface HotelUserRepository extends JpaRepository<HotelUser, Long> {
     Optional<HotelUser> findHotelUsersByEmail(String email);
 
+    void deleteUserById(Long id);
+    HotelUser findHotelUserById(Long id);
 }

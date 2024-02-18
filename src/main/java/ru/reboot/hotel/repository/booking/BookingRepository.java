@@ -20,4 +20,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("select b.hotelUser, b.id, b.note, b.room, b.startDate, b.endDate from Booking as b where b.hotelUser = :id")
     List<Map<String, String>> findBookingByUserId(@Param("id") long id);
+  
+    @Query(value = "SELECT new map(b.id as id, u.email as email, rt.roomName as roomName, b.startDate as startDate, b.endDate as endDate, b.note as note ) from Booking as b join b.hotelUser as u cross JOIN RoomType rt" )
+    List<Map<String, String>> getAllBookingTable();
+
 }

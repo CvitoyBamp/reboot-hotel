@@ -14,9 +14,8 @@ import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.utils.security.CustomUserDetails;
 import ru.reboot.hotel.utils.security.SecurityUtil;
 
+import java.util.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -32,6 +31,15 @@ public class BookingService {
     public void saveBooking(Booking booking) {
         bookingRepository.save(booking);
     }
+
+
+    @Transactional(readOnly = true)
+    public List<Map<String, String>> getAllBookingTable(){
+        return bookingRepository.getAllBookingTable();
+    }
+
+    public void deleteById(String id){
+        bookingRepository.deleteById(Long.valueOf(id));
 
     public List<Long> getRoomsWhichIsLocked(LocalDate startDate, LocalDate endDate) {
         return bookingRepository.findRoomsIdWhichIsLockedForSelectedData(startDate, endDate);
