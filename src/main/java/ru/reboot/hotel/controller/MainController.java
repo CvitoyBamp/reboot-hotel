@@ -169,4 +169,10 @@ public class MainController {
         return "register";
     }
 
+    @PostMapping("/personal")
+    public String personal(@RequestParam(name="email", required=false) String email, Model model) {
+        model.addAttribute("hotelUser", bookingService.getUserByUsername(email));
+        return "personal_area";
+    }
+
 }
