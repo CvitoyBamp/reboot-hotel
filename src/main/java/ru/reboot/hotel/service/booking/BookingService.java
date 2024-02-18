@@ -1,6 +1,7 @@
 package ru.reboot.hotel.service.booking;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +17,11 @@ import ru.reboot.hotel.utils.security.SecurityUtil;
 
 import java.util.*;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 /**
  * Service BookingService. For BookingRepository
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class BookingService {
@@ -30,6 +31,7 @@ public class BookingService {
 
     public void saveBooking(Booking booking) {
         bookingRepository.save(booking);
+        log.info("Booking " + booking.toString() + " was saved to db.");
     }
 
 
@@ -38,8 +40,9 @@ public class BookingService {
         return bookingRepository.getAllBookingTable();
     }
 
-    public void deleteById(String id){
+    public void deleteById(String id) {
         bookingRepository.deleteById(Long.valueOf(id));
+    }
 
     public List<Long> getRoomsWhichIsLocked(LocalDate startDate, LocalDate endDate) {
         return bookingRepository.findRoomsIdWhichIsLockedForSelectedData(startDate, endDate);

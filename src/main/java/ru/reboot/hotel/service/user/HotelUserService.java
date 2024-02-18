@@ -1,6 +1,8 @@
 package ru.reboot.hotel.service.user;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +20,14 @@ import java.util.*;
  */
 @Service
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class HotelUserService {
-    @Autowired
+
     HotelUserRepository hotelUserRepository;
 
-    @Autowired
-    private ReviewsRepository reviewsRepository;
+    ReviewsRepository reviewsRepository;
 
-    @Autowired
-    private RolesRepository rolesRepository;
+    RolesRepository rolesRepository;
 
     @Transactional
     public void createHotelUser(HotelUser hotelUser){
@@ -51,9 +52,7 @@ public class HotelUserService {
         if (user != null) {
             // Получаем связанные записи в таблице "reviews"
             List<Reviews> relatedReviews = reviewsRepository.findByHotelUser(user);
-            for (Reviews review : relatedReviews) {
-                reviewsRepository.delete(review);
-            }
+            reviewsRepository.deleteAll(relatedReviews);
 //            List<Roles> relatedRoles = rolesRepository.findByHotelUsers(user);
 //            for (Roles role : relatedRoles) {
 //                rolesRepository.delete(role);

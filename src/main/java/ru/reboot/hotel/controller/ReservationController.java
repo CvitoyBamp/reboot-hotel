@@ -56,6 +56,8 @@ public class ReservationController {
 
         bookingService.saveBooking(booking);
 
+        model.addAttribute("email", booking.getHotelUser().getEmail());
+
         return "reservation_result";
     }
 

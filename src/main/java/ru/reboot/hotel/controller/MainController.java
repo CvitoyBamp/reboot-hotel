@@ -112,8 +112,8 @@ public class MainController {
     }
 
     @PostMapping("/checkFreeData")
-    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate inData,
-                                                      @RequestParam(value = "outData") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate outData,
+    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData", defaultValue = "18/02/2024") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate inData,
+                                                      @RequestParam(value = "outData", defaultValue = "19/02/2024") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate outData,
                                                       @RequestParam(value = "adults", defaultValue = "0") Integer adults,
                                                       @RequestParam(value = "kids", defaultValue = "0") Integer kids,
                                                       Model model) {

@@ -99,10 +99,20 @@
             </div>
           </div>
           <div class="col-md-12 col-lg-6 order-lg-1" data-aos="fade-up" th:if="${error == null}">
-            <h2 class="heading">ПОЗДРАВЛЯЕМ!</h2>
+            <h2 class="heading">Вы успешно забронировали номер.</h2>
           </div>
         </div>
       </div>
+        <div class="container">
+            <div class="col-md-12 col-lg-6 align-self-center">
+                <h2 class="heading">Посмотреть информацию о вашем бронировании вы можете в личном кабинете:</h2>
+                <form class="user" th:action="@{/personal}" method="post" id="lk">
+                    <button class="btn btn-primary btn-user btn-block" form="lk" th:value="${email}">
+                        Личный кабинет
+                    </button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <section class="section contact-section" id="next">
@@ -120,14 +130,6 @@
         </div>
       </div>
     </section>
-
-    <div class="container">
-        <div class="col-md-12 col-lg-6 align-self-center">
-            <h2 class="heading">Посмотреть информацию о вашем бронировании вы можете в личном кабинете:</h2>
-            <li><a th:href="@{/personalArea}">Личный кабинет</a></li>
-        </div>
-    </div>
-
 
     <!-- Insert footer section (about us and etc.)-->
     <div th:insert="~{fragments/footer.html :: footer}"></div>
