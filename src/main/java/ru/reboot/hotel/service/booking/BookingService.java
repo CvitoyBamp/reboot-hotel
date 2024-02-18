@@ -1,7 +1,6 @@
 package ru.reboot.hotel.service.booking;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.repository.booking.BookingRepository;
@@ -9,6 +8,9 @@ import ru.reboot.hotel.repository.booking.BookingRepository;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service BookingService. For BookingRepository
+ */
 @Service
 @AllArgsConstructor
 public class BookingService {
