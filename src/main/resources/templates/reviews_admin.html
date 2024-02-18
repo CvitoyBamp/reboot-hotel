@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sber Hotel by team3 Управление отзывами</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
 
-    <title>SB Admin 2 - Номера</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css" integrity="sha512-phGxLIsvHFArdI7IyLjv14dchvbVkEDaH95efvAae/y2exeWBQCQDpNFbOTdV1p4/pIa/XtbuDCnfhDEIXhvGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.min.css" integrity="sha512-WlaNl0+Upj44uL9cq9cgIWSobsjEOD1H7GK1Ny1gmwl43sO0QAUxVpvX2x+5iQz/C60J3+bM7V07aC/CNWt/Yw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css" integrity="sha512-0/rEDduZGrqo4riUlwqyuHDQzp2D1ZCgH/gFIfjMIL5az8so6ZiXyhf1Rg8i6xsjv+z/Ubc4tt1thLigEcu6Ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons-core.min.css" integrity="sha512-OmevVDECSDeo7M4G+Nvh0+VLVGS2XnEOkXWJcJ0TRom3GpGgc/ryQIgpRZw20mb5eR2U0sqsm33MaR8yD1zdsQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Theme Style -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
 
 </head>
 
@@ -64,7 +73,6 @@
                                         <th>Пользователь</th>
                                         <th>Отзыв</th>
                                         <th style="width: 100px">Рейтинг</th>
-                                        <th>Создан</th>
                                         <th>Действия</th>
                                     </tr>
                                 </thead>
@@ -73,324 +81,24 @@
                                         <th>Пользователь</th>
                                         <th>Отзыв</th>
                                         <th style="width: 100px">Рейтинг</th>
-                                        <th>Создан</th>
                                         <th>Действия</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
 
-                                <tr>
-                                    <td><a href="#">minerva.keeling@example.org</a></td>
-                                    <td>Optio distinctio accusamus omnis enim. Rem omnis quis est. At et vero quidem consequatur. Porro corrupti laborum tempore maxime inventore et.</td>
+                                <tr th:each="map : ${reviews}">
+                                    <td th:text="${map['email']}">Пользователь</td>
+                                    <td th:text="${map['comment']}">Отзыв</td>
+                                    <td th:text="${map['rating']}">Рейтинг</td>
                                     <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-22 12:29</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                        <form th:action="@{/reviews_admin_delete}" method="post">
+                                            <input type="hidden" name="id" th:value="${map['id']}">
+                                            <button type="submit" class="btn btn-danger btn-circle btn-sm" title="Удалить"></button>
+                                        </form>
 
-                                <tr>
-                                    <td><a href="#">fshanahan@example.com</a></td>
-                                    <td>Ut fugiat consequatur alias laborum voluptate. Facilis quisquam voluptas perferendis dolores. Recusandae et natus inventore voluptatem.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-02-02 00:05</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                  <!--      <form th:action="@{/admin/reviews/delete/{id}(id=${map['id']})}" method="post">  <button  type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить"> </button>
                                             <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">claire01@example.com</a></td>
-                                    <td>Quam labore sit ducimus itaque dolor. Aut illum recusandae molestiae. Dolores perferendis minima sapiente sit cum quisquam.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-05 13:02</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">mbrakus@example.com</a></td>
-                                    <td>Quo suscipit maiores mollitia architecto cum ea voluptatem. Mollitia fugit autem commodi qui est ipsam occaecati. Maiores et perferendis in. Quibusdam mollitia qui et voluptatem ut maiores dolorum.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-13 07:57</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">pwaelchi@example.org</a></td>
-                                    <td>Sequi veritatis consequatur odio explicabo incidunt. Dolores magni quo doloribus dolore sit. Autem est incidunt dolorem.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-23 10:39</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">voreilly@example.com</a></td>
-                                    <td>Debitis sunt et ab repudiandae. Non quasi voluptatem delectus et vel. Sint voluptates laborum distinctio et esse fugiat possimus. Dolore praesentium consequatur maxime magni voluptatem iusto et.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-21 09:07</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">domingo79@example.com</a></td>
-                                    <td>Suscipit minima facilis culpa eum doloribus totam a nam. Iure quod quidem soluta natus voluptatem. Libero odit quae minima accusantium ipsa voluptas qui.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-01 02:48</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">gutkowski.anastasia@example.net</a></td>
-                                    <td>Laborum ea dolores hic ullam ut. Sint quam excepturi voluptas similique omnis. Consequatur magni nihil unde quis vel doloremque iusto quia. Totam eos qui ea ut dolores magnam sequi.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-15 17:18</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">jaren.gerlach@example.com</a></td>
-                                    <td>Possimus et quia rerum quisquam omnis asperiores sunt. Maxime nobis iste et qui et qui impedit. Quisquam eum assumenda illo qui ullam.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-19 07:09</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">windler.kenneth@example.com</a></td>
-                                    <td>Tenetur esse illo vel deleniti officiis quos. Ad commodi qui exercitationem consequuntur. Atque sit voluptatibus perspiciatis animi. Iste voluptas omnis praesentium.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-25 17:21</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">eulah05@example.org</a></td>
-                                    <td>Cumque mollitia vel nihil vel sint. Odio enim totam ut eligendi maiores unde. Exercitationem nostrum in id sunt ea sint.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-20 10:28</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">mabel84@example.com</a></td>
-                                    <td>Vero velit quibusdam dolorem et expedita laudantium alias hic. A perferendis non vel architecto aut omnis. Distinctio iure aut minima praesentium.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-12 21:42</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">noe.torp@example.org</a></td>
-                                    <td>Officiis tenetur sint quis similique et esse fuga voluptatum. Commodi molestiae nesciunt ratione aliquam facilis. Voluptas vel tempora sit earum ea.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-09 00:54</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">wintheiser.herminia@example.org</a></td>
-                                    <td>Alias libero voluptatem quasi sed placeat nisi. Unde vitae quia ut et. Quis cupiditate odio enim quia voluptas numquam. Culpa facilis vel voluptatem eum. Vel porro aut enim placeat excepturi maiores.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </td>
-                                    <td>2024-01-25 17:03</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">cartwright.dulce@example.org</a></td>
-                                    <td>Repellat voluptatem nihil odio enim aliquam nemo voluptates. Aliquam exercitationem dolores enim voluptatem. Cum numquam eos inventore voluptatem sint fugiat aspernatur odio.</td>
-                                    <td>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </td>
-                                    <td>2024-01-15 05:34</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        </form> -->
                                     </td>
                                 </tr>
                                 </tbody>

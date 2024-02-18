@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sber Hotel by team3 Уплавление пользователями</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
 
-    <title>SB Admin 2 - Tables</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css" integrity="sha512-phGxLIsvHFArdI7IyLjv14dchvbVkEDaH95efvAae/y2exeWBQCQDpNFbOTdV1p4/pIa/XtbuDCnfhDEIXhvGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.min.css" integrity="sha512-WlaNl0+Upj44uL9cq9cgIWSobsjEOD1H7GK1Ny1gmwl43sO0QAUxVpvX2x+5iQz/C60J3+bM7V07aC/CNWt/Yw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css" integrity="sha512-0/rEDduZGrqo4riUlwqyuHDQzp2D1ZCgH/gFIfjMIL5az8so6ZiXyhf1Rg8i6xsjv+z/Ubc4tt1thLigEcu6Ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons-core.min.css" integrity="sha512-OmevVDECSDeo7M4G+Nvh0+VLVGS2XnEOkXWJcJ0TRom3GpGgc/ryQIgpRZw20mb5eR2U0sqsm33MaR8yD1zdsQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Theme Style -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 
@@ -61,297 +68,62 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Имя</th>
                                             <th>Email</th>
                                             <th>Телефон</th>
                                             <th>Дата рождения</th>
-                                            <th>Дата регистрации</th>
-                                            <th>Дата обновления</th>
                                             <th>Действия</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Имя</th>
                                             <th>Email</th>
                                             <th>Телефон</th>
                                             <th>Дата рождения</th>
-                                            <th>Дата регистрации</th>
-                                            <th>Дата обновления</th>
                                             <th>Действия</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Molly Hansen</td>
-                                            <td>Kian73@hotmail.com</td>
-                                            <td>920-711-4463</td>
-                                            <td>2023-04-10 10:09:41</td>
-                                            <td>2024-01-18 00:27:09</td>
-                                            <td>2024-01-18 00:27:09</td>
+                                        <tr th:each="rm: ${users}">
+                                            <td th:text="${rm.getId}">Id</td>
+                                            <td th:text="${rm.getName}">Имя</td>
+                                            <td th:text="${rm.getEmail()}">Email</td>
+                                            <td th:text="${rm.getPhone()}">Телефон</td>
+                                            <td th:text="${rm.getBirthday()}">Дата рождения</td>
                                             <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
+                                                <form th:action="@{/users_admin_delete}" method="post">
+                                                    <input type="hidden" name="id" th:value="${rm.getId}">
+                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm" title="Удалить"></button>
+                                                </form>
+                                              <!--  <a th:hx-post="@{/admin/users/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
                                                     <i class="fas fa-trash"></i>
-                                                </a>
+                                                </a>-->
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td>Donnell Kulas</td>
-                                            <td>brandt.jast@gmail.com</td>
-                                            <td>+18707128981</td>
-                                            <td>1954-10-21 17:24</td>
-                                            <td>2024-01-04 16:54</td>
-                                            <td>2024-01-04 16:54</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Jalyn Cruickshank</td>
-                                            <td>grady.general@gmail.com</td>
-                                            <td>+19259877620</td>
-                                            <td>1974-01-18 01:03</td>
-                                            <td>2024-01-20 07:05</td>
-                                            <td>2024-01-20 07:05</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Rosamond Bogisich</td>
-                                            <td>tanner53@gmail.com</td>
-                                            <td>+16107456075</td>
-                                            <td>2004-10-03 19:03</td>
-                                            <td>2024-01-20 19:45</td>
-                                            <td>2024-01-20 19:45</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Dr. Edwardo Schuster</td>
-                                            <td>bosco.carey@bogisich.com</td>
-                                            <td>+19868197865</td>
-                                            <td>1956-10-26 18:37</td>
-                                            <td>2024-01-15 17:38</td>
-                                            <td>2024-01-15 17:38</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Ms. Tianna Gleichner</td>
-                                            <td>purdy.rowan@hotmail.com</td>
-                                            <td>+19313356825</td>
-                                            <td>1939-07-10 05:33</td>
-                                            <td>2024-01-16 06:18</td>
-                                            <td>2024-01-16 06:18</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Olin Medhurst</td>
-                                            <td>zkilback@hotmail.com</td>
-                                            <td>+16813809131</td>
-                                            <td>1964-06-17 18:37</td>
-                                            <td>2024-01-17 13:41</td>
-                                            <td>2024-01-17 13:41</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Beth Murray</td>
-                                            <td>steuber.dallin@hotmail.com</td>
-                                            <td>+13644067513</td>
-                                            <td>1993-09-03 12:21</td>
-                                            <td>2024-01-20 16:39</td>
-                                            <td>2024-01-20 16:39</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Helena Gerhold</td>
-                                            <td>bins.wilfredo@example.com</td>
-                                            <td>+17609448504</td>
-                                            <td>1992-01-17 20:36</td>
-                                            <td>2024-01-11 14:32</td>
-                                            <td>2024-01-11 14:32</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Breanne King</td>
-                                            <td>nhirthe@example.org</td>
-                                            <td>+15039814704</td>
-                                            <td>1968-08-24 11:03</td>
-                                            <td>2024-01-04 16:05</td>
-                                            <td>2024-01-04 16:05</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Kolby Kuphal</td>
-                                            <td>adaline06@example.com</td>
-                                            <td>+18309079696</td>
-                                            <td>2013-05-24 15:10</td>
-                                            <td>2024-01-28 19:18</td>
-                                            <td>2024-01-28 19:18</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Chester Pagac</td>
-                                            <td>keeley.heller@example.com</td>
-                                            <td>+17256133539</td>
-                                            <td>1995-09-03 01:54</td>
-                                            <td>2024-01-11 10:56</td>
-                                            <td>2024-01-11 10:56</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Prof. Cornelius Howe V</td>
-                                            <td>armand.schneider@example.com</td>
-                                            <td>+18287939964</td>
-                                            <td>2006-03-30 13:35</td>
-                                            <td>2024-01-15 15:59</td>
-                                            <td>2024-01-15 15:59</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Madyson Hirthe</td>
-                                            <td>vgreenfelder@example.net</td>
-                                            <td>+17035617690</td>
-                                            <td>1928-08-22 13:42</td>
-                                            <td>2024-01-30 22:16</td>
-                                            <td>2024-01-30 22:16</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Caroline Spinka</td>
-                                            <td>alexandrine26@example.com</td>
-                                            <td>+18133558962</td>
-                                            <td>2002-11-15 06:34</td>
-                                            <td>2024-01-04 04:52</td>
-                                            <td>2024-01-04 04:52</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Lane Borer</td>
-                                            <td>rsanford@example.net</td>
-                                            <td>+13364364509</td>
-                                            <td>2009-10-16 06:09</td>
-                                            <td>2024-02-01 01:09</td>
-                                            <td>2024-02-01 01:09</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <form th:action="@{/save_user}" method="post">
+                                            <th>
+                                                <input type="number" id="id" name="id">
+                                            </th>
+                                            <th>
+                                                <input type="text" id="name" name="name">
+                                            </th>
+                                            <th>
+                                                <input type="text" id="email" name="email">
+                                            </th>
+                                            <th>
+                                                <input type="text" id="phone" name="phone">
+                                            </th>
+                                            <th>
+                                                <input type="date" id="birthday" name="birthday">
+                                            </th>
+                                            <th>
+                                                <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить"><i class="fas fa-indent"></i></button>
+                                            </th>
+                                            </form>
                                         </tr>
                                     </tbody>
                                 </table>

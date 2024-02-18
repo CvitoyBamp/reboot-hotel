@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sber Hotel by team3 Управление бронированием</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
 
-    <title>SB Admin 2 - Бронирования</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css" integrity="sha512-phGxLIsvHFArdI7IyLjv14dchvbVkEDaH95efvAae/y2exeWBQCQDpNFbOTdV1p4/pIa/XtbuDCnfhDEIXhvGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.14.1/jquery.timepicker.min.css" integrity="sha512-WlaNl0+Upj44uL9cq9cgIWSobsjEOD1H7GK1Ny1gmwl43sO0QAUxVpvX2x+5iQz/C60J3+bM7V07aC/CNWt/Yw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css" integrity="sha512-0/rEDduZGrqo4riUlwqyuHDQzp2D1ZCgH/gFIfjMIL5az8so6ZiXyhf1Rg8i6xsjv+z/Ubc4tt1thLigEcu6Ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons-core.min.css" integrity="sha512-OmevVDECSDeo7M4G+Nvh0+VLVGS2XnEOkXWJcJ0TRom3GpGgc/ryQIgpRZw20mb5eR2U0sqsm33MaR8yD1zdsQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Theme Style -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 
@@ -83,274 +90,21 @@
                                 </tfoot>
                                 <tbody>
                                 <tr>
-                                    <td><a href="#">mae.white@example.org</a></td>
-                                    <td><a href="#">Ferry Club</a></td>
-                                    <td>2024-01-04 09:39</td>
-                                    <td>2024-01-03 04:33</td>
-                                    <td>2024-01-12 06:46</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
+                                <tr th:each="map : ${booking}">
+                                    <td th:text="${map['email']}">Пользователь</td>
+                                    <td th:text="${map['roomname']}">Номер</td>
+                                    <td th:text="${map['startdate']}">От</td>
+                                    <td th:text="${map['enddate']}">До</td>
+                                    <td th:text="${map['note']}">Статус</td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                        <form th:action="@{/booking_admin_delete}" method="post">
+                                            <input type="hidden" name="id" th:value="${map['id']}">
+                                            <button type="submit" class="btn btn-danger btn-circle btn-sm" title="Удалить"></button>
+                                        </form>
 
-                                <tr>
-                                    <td><a href="#">lubowitz.josefa@example.com</a></td>
-                                    <td><a href="#">Eloisa Manor</a></td>
-                                    <td>2024-01-13 07:14</td>
-                                    <td>2024-01-31 10:42</td>
-                                    <td>2024-01-18 12:27</td>
-                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">harmony56@example.net</a></td>
-                                    <td><a href="#">Rusty Union</a></td>
-                                    <td>2024-01-08 17:37</td>
-                                    <td>2024-01-30 01:30</td>
-                                    <td>2024-01-23 16:02</td>
-                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">tkuhlman@example.org</a></td>
-                                    <td><a href="#">Justen Burgs</a></td>
-                                    <td>2024-01-31 20:40</td>
-                                    <td>2024-01-15 15:47</td>
-                                    <td>2024-01-21 03:07</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">geffertz@example.net</a></td>
-                                    <td><a href="#">Carmel Terrace</a></td>
-                                    <td>2024-01-04 08:27</td>
-                                    <td>2024-01-08 15:58</td>
-                                    <td>2024-01-05 18:27</td>
-                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">bcrona@example.org</a></td>
-                                    <td><a href="#">Kutch Harbors</a></td>
-                                    <td>2024-01-04 19:49</td>
-                                    <td>2024-02-01 08:05</td>
-                                    <td>2024-01-23 02:30</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">jonathan.friesen@example.com</a></td>
-                                    <td><a href="#">Georgianna Views</a></td>
-                                    <td>2024-01-19 13:46</td>
-                                    <td>2024-02-01 13:04</td>
-                                    <td>2024-01-26 18:55</td>
-                                    <td><span class="badge badge-pill badge-danger">Отменено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">earnestine.oconnell@example.com</a></td>
-                                    <td><a href="#">Kozey Track</a></td>
-                                    <td>2024-01-21 08:37</td>
-                                    <td>2024-01-20 05:49</td>
-                                    <td>2024-01-17 14:59</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">xheaney@example.net</a></td>
-                                    <td><a href="#">Derek Locks</a></td>
-                                    <td>2024-01-06 09:29</td>
-                                    <td>2024-01-25 20:47</td>
-                                    <td>2024-01-14 19:38</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">nicholas.roob@example.org</a></td>
-                                    <td><a href="#">Felipa Harbor</a></td>
-                                    <td>2024-01-21 04:20</td>
-                                    <td>2024-02-03 23:58</td>
-                                    <td>2024-01-16 11:55</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">darwin.reichert@example.org</a></td>
-                                    <td><a href="#">Ian Rue</a></td>
-                                    <td>2024-01-22 07:13</td>
-                                    <td>2024-01-28 13:55</td>
-                                    <td>2024-01-26 03:16</td>
-                                    <td><span class="badge badge-pill badge-danger">Отменено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">fredy11@example.net</a></td>
-                                    <td><a href="#">Ian Roads</a></td>
-                                    <td>2024-01-03 15:38</td>
-                                    <td>2024-01-01 16:29</td>
-                                    <td>2024-01-10 04:21</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">anais33@example.org</a></td>
-                                    <td><a href="#">Kenyon Summit</a></td>
-                                    <td>2024-01-31 07:03</td>
-                                    <td>2024-01-02 19:52</td>
-                                    <td>2024-01-06 17:55</td>
-                                    <td><span class="badge badge-pill badge-warning">Резерв</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">casper16@example.net</a></td>
-                                    <td><a href="#">Lindgren Village</a></td>
-                                    <td>2024-01-01 04:45</td>
-                                    <td>2024-01-21 20:36</td>
-                                    <td>2024-01-22 22:01</td>
-                                    <td><span class="badge badge-pill badge-dark">Завершено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">jorge.littel@example.net</a></td>
-                                    <td><a href="#">Maci Street</a></td>
-                                    <td>2024-01-13 04:28</td>
-                                    <td>2024-02-03 11:04</td>
-                                    <td>2024-01-23 03:55</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><a href="#">janae73@example.com</a></td>
-                                    <td><a href="#">Nona Island</a></td>
-                                    <td>2024-01-26 07:50</td>
-                                    <td>2024-02-03 18:07</td>
-                                    <td>2024-01-16 01:53</td>
-                                    <td><span class="badge badge-pill badge-success">Оплачено</span></td>
-                                    <td>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm" title="Редактировать">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm"  title="Удалить">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+<!--                                        <a th:hx-post="@{/admin/booking/delete/{id}(id=${map['id']})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">-->
+<!--                                            <i class="fas fa-trash"></i>-->
+<!--                                        </a>-->
                                     </td>
                                 </tr>
                                 </tbody>
