@@ -84,7 +84,21 @@
 <!--            </figure>-->
 <!--            <img src="images/img_1.jpg" alt="Image" class="img-fluid rounded">-->
 <!--          </div>-->
-          <div class="col-md-12 col-lg-6 order-lg-1" data-aos="fade-up">
+          <div th:if="${error == 'date'}">
+            <div class="ml-3">
+              <div class="mt-2 text-sm text-red-700">
+                <p>Неверные даты, бронирование не может быть за вчерашние дни. Повторите попытку.</p>
+              </div>
+            </div>
+          </div>
+          <div th:if="${error == 'binding'}">
+            <div class="ml-3">
+              <div class="mt-2 text-sm text-red-700">
+                <p>Что-то пошло не так. Повторите попытку/</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6 order-lg-1" data-aos="fade-up" th:if="${error == null}">
             <h2 class="heading">ПОЗДРАВЛЯЕМ!</h2>
             <p class="mb-4 h4">Вы успешно забронировали номер в нашем отеле! Мы ждем Вас по адресу:</p>
           </div>

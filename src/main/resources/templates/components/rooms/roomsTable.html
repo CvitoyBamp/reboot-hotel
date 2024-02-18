@@ -30,7 +30,7 @@
             </tfoot>
             <tbody>
             <tr th:each="rm: ${rooms}">
-                <td th:text="${rm.getRoomTypeId}">Тип номера</td>
+                <td th:text="${rm.getRoomType().getId()}">Тип номера</td>
                 <td th:text="${rm.getPricePerDay()}">Цена за день</td>
                 <td th:text="${rm.getIsLocked()}">Номер занят?</td>
                 <td>

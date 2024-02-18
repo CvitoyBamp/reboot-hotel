@@ -38,13 +38,13 @@ public class RoomService {
     }
 
     @Transactional(readOnly = true)
-    public List<Map<String, String>> getRoomsForReservation() {
-        return roomRepository.findRoomsForReservation();
+    public Room getRoomByRoomId(String roomId) {
+        return roomRepository.findRoomsById(Long.valueOf(roomId));
     }
 
     @Transactional(readOnly = true)
-    public Room getRoomByRoomId(String roomId) {
-        return roomRepository.findRoomsById(Long.valueOf(roomId));
+    public List<Map<String, String>> findRoomsWhereIdNotInList(List<Long> ids, int adult, int child) {
+        return roomRepository.findRoomsByIdNotInAndAdultAndChildrenIn(ids, adult, child);
     }
 
     @Transactional
@@ -55,11 +55,6 @@ public class RoomService {
     @Transactional
     public void deleteRoomById(String id) {
         roomRepository.deleteRoomById(Long.valueOf(id));
-    }
-
-    @Transactional
-    public void updateRoomStatus(Long id) {
-        roomRepository.setIsLockedToRoomByBooking(id);
     }
 
 }

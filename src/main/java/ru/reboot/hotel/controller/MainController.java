@@ -1,7 +1,10 @@
 package ru.reboot.hotel.controller;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.roles.Roles;
+import ru.reboot.hotel.entity.room.Room;
 import ru.reboot.hotel.entity.user.HotelUser;
+import ru.reboot.hotel.service.booking.BookingService;
 import ru.reboot.hotel.service.reviews.ReviewsService;
 import ru.reboot.hotel.service.room.PhotoStoreService;
 import ru.reboot.hotel.service.room.RoomService;
@@ -19,9 +24,13 @@ import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -29,22 +38,25 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Controller
 public class MainController {
 
-    private RoomService roomService;
+    RoomService roomService;
 
-    private RoomTypeService roomTypeService;
+    RoomTypeService roomTypeService;
 
-    private PhotoStoreService photoStoreService;
+    PhotoStoreService photoStoreService;
 
-    private ReviewsService reviewsService;
+    ReviewsService reviewsService;
 
-    private HotelUserService hotelUserService;
+    HotelUserService hotelUserService;
 
-    private RoleService roleService;
+    RoleService roleService;
 
-    private PasswordEncoder passwordEncoder;
+    BookingService bookingService;
+
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String getMainPage() {
@@ -104,12 +116,21 @@ public class MainController {
     }
 
     @PostMapping("/checkFreeData")
-    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData", required = false) LocalDate inData,
-                                                      @RequestParam(value = "outData", required = false) LocalDate outData,
+    public String roomsPageAfterGettingDataFromClient(@RequestParam(value = "inData") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate inData,
+                                                      @RequestParam(value = "outData") @DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) LocalDate outData,
                                                       @RequestParam(value = "adults", defaultValue = "0") Integer adults,
                                                       @RequestParam(value = "kids", defaultValue = "0") Integer kids,
                                                       Model model) {
-        model.addAttribute("rooms", roomService.getRoomsAfterGettingData(adults, kids));
+        List<Map<String, String>> rooms = new ArrayList<>();
+        List<Long> ids = bookingService.getRoomsWhichIsLocked(inData, outData);
+        if (ids.isEmpty()) {
+            rooms = roomService.getRoomsAfterGettingData(adults, kids);
+        } else {
+            rooms = roomService.findRoomsWhereIdNotInList(ids, adults, kids);
+        }
+        log.info(ids.toString());
+        log.info(rooms.toString());
+        model.addAttribute("rooms", rooms);
         model.addAttribute("roomsType", roomTypeService.getAllRoomTypes());
         return "rooms";
     }

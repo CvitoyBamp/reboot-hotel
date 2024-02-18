@@ -35,7 +35,7 @@ import java.util.stream.IntStream;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/reservation")
 @Controller
-@SessionAttributes(names = {"booking", "id"})
+@SessionAttributes("booking")
 public class ReservationController {
 
     RoomService roomService;
@@ -50,20 +50,26 @@ public class ReservationController {
     public String roomsPageAfterGettingDataFromClient(@ModelAttribute("booking") @Valid Booking booking,
                                                       BindingResult result,
                                                       Model model) {
-        log.info(booking.toString());
         if (result.hasErrors()) {
             log.error("Error while get booking data: {}", result.getGlobalError());
+            return "redirect:/reservation/result?error=binding";
         }
 
         if (booking.getStartDate().isBefore(LocalDate.now())
                 || booking.getEndDate().isBefore(LocalDate.now())
                 || booking.getEndDate().isBefore(booking.getStartDate())) {
-            return "redirect:/certain_room?error=date?checked_room_id={id}";
+            return "redirect:/reservation/result?error=date";
         }
 
         bookingService.saveBooking(booking);
-        roomService.updateRoomStatus(booking.getRoom().getId());
 
+        return "reservation_result";
+    }
+
+    @GetMapping("/result")
+    public String getResult(@RequestParam("error") String error,
+                            Model model) {
+        model.addAttribute("error", error);
         return "reservation_result";
     }
 
