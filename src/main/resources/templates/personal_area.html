@@ -90,7 +90,9 @@ about.html<html lang="en" xmlns:th="http://www.thymeleaf.org">
       <div class="row justify-content-center text-center mb-5">
         <div class="col-md-7 mb-5">
           <h2 class="heading" data-aos="fade-up">Мои бронирования</h2>
-          <span class="text-uppercase letter-spacing-1" th:text="${hotelUser.getBookings()}">Бронирования</span><br>
+          <div th:each="booking: ${bookings}">
+            <span class="text-uppercase letter-spacing-1" th:text="'C ' + ${booking.getStartDate()} + ' по ' + ${booking.getEndDate()} + ' отдыхаю в ' + ${booking.getRoom().getRoomType().getRoomName()}">Бронирования</span><br>
+          </div>
           <button class="btn btn-primary btn-block text-white">Редактировать мои бронирования</button>
         </div>
       </div>
@@ -98,7 +100,9 @@ about.html<html lang="en" xmlns:th="http://www.thymeleaf.org">
       <div class="row justify-content-center text-center mb-5">
         <div class="col-md-7 mb-5">
           <h2 class="heading" data-aos="fade-up">Мои отзывы</h2>
-          <span class="text-uppercase letter-spacing-1" th:text="${hotelUser.getReviewsList()}">Отзывы</span><br>
+          <div th:each="review: ${reviews}">
+            <span class="text-uppercase letter-spacing-1" th:text="${review.getComment()}">Отзывы</span><br>
+          </div>
           <button class="btn btn-primary btn-block text-white">Редактировать мои отзывы</button>
         </div>
       </div>

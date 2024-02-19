@@ -9,7 +9,9 @@
                         <h2 class="text-white font-weight-bold">Лучшее место для отдыха! Зарезервировать сейчас!</h2>
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-                        <a th:href="@{/reservation}" class="btn btn-outline-white-primary py-3 text-white px-5">Зарезервировать сейчас</a>
+                        <form th:action="@{/checkFreeData}" method="post" id="reserv">
+                            <li><a onclick="document.getElementById('reserv').submit();" class="btn btn-outline-white-primary py-3 text-white px-5">Зарезервировать сейчас</a></li>
+                        </form><
                     </div>
                 </div>
             </div>

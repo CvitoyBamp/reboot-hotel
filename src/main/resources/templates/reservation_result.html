@@ -106,8 +106,8 @@
         <div class="container">
             <div class="col-md-12 col-lg-6 align-self-center">
                 <h2 class="heading">Посмотреть информацию о вашем бронировании вы можете в личном кабинете:</h2>
-                <form class="user" th:action="@{/personal}" method="post" id="lk">
-                    <button class="btn btn-primary btn-user btn-block" form="lk" th:value="${email}">
+                <form class="user" th:action="@{/personal}" method="get" id="lk">
+                    <button class="btn btn-primary btn-user btn-block" form="lk">
                         Личный кабинет
                     </button>
                 </form>

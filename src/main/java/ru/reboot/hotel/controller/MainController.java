@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 import ru.reboot.hotel.service.user.HotelUserService;
 import ru.reboot.hotel.service.user.RoleService;
+import ru.reboot.hotel.utils.security.CustomUserDetails;
+
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -159,15 +162,14 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/personalArea")
-    public String register(Model model) {
-        model.addAttribute("hotelUser", new HotelUser());
-        return "register";
-    }
-
-    @PostMapping("/personal")
-    public String personal(@RequestParam(name="email", required=false) String email, Model model) {
-        model.addAttribute("hotelUser", bookingService.getUserByUsername(email));
+    @GetMapping("/personal")
+    public String personal(Model model,
+                           Authentication authentication) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        var hu = customUserDetails.getHotelUser();
+        model.addAttribute("hotelUser", hu);
+        model.addAttribute("bookings", bookingService.getBookingsByHotelUser(hu));
+        model.addAttribute("reviews", reviewsService.getReviewsByHotelUser(hu));
         return "personal_area";
     }
 

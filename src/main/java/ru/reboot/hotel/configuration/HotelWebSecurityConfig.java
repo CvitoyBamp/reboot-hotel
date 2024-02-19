@@ -65,6 +65,7 @@ public class HotelWebSecurityConfig {
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .requestMatchers("/reservation/**").hasRole("USER")
+                                .requestMatchers("/personal/**").hasRole("USER")
                                 .requestMatchers("/**").permitAll()
                 )
                 .formLogin(form -> form

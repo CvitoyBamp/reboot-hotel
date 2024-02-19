@@ -29,4 +29,8 @@ public class RoomTypeService {
         roomTypeRepository.deleteById(Long.valueOf(id));
     }
 
+    public RoomType getRoomTypeById(String id) {
+        return roomTypeRepository.findRoomTypeById(Long.valueOf(id));
+    }
+
 }

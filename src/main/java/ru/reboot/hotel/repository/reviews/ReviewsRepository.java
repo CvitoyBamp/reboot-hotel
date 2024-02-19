@@ -8,6 +8,7 @@ import ru.reboot.hotel.entity.user.HotelUser;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Repository ReviewsRepository. Table name = "reviews"
@@ -21,7 +22,7 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
     @Query(value = "SELECT new map( r.id as id, u.email as email, r.comment as comment, r.rating as rating) from Reviews as r join r.hotelUser as u")
     List<Map<String, String>> getAllReviewsTable();
 
-    List<Reviews> findByHotelUser(HotelUser hotelUser);
+    Optional<List<Reviews>> findByHotelUser(HotelUser hotelUser);
 
     void deleteReviewById(Long id);
 

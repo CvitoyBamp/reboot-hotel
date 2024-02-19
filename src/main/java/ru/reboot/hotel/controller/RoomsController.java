@@ -12,6 +12,8 @@ import ru.reboot.hotel.entity.room.RoomType;
 import ru.reboot.hotel.service.room.RoomService;
 import ru.reboot.hotel.service.room.RoomTypeService;
 
+import java.math.BigDecimal;
+
 /**
  * Controller for rooms controlling by admin
  */
@@ -42,8 +44,10 @@ public class RoomsController {
     @PostMapping("/table/create")
     @HxTrigger("createRoom")
     @HxRequest
-    public String createRoom(@ModelAttribute Room room) {
-        roomService.createNewRoom(room);
+    public String createRoom(@RequestParam(value = "roomTypeId") String roomTypeId,
+                             @RequestParam(value = "pricePerDay") String pricePerDay,
+                             @RequestParam(value = "isLocked") String isLocked) {
+        roomService.createNewRoom(new Room(BigDecimal.valueOf(Long.parseLong(pricePerDay)), Boolean.getBoolean(isLocked), roomTypeService.getRoomTypeById(roomTypeId)));
         return "rooms_admin";
     }
     @PostMapping("/table/delete/{id}")

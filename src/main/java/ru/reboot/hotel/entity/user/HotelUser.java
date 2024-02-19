@@ -69,48 +69,4 @@ public class HotelUser extends AuditEntity {
     @OneToMany(mappedBy = "hotelUser", targetEntity = Booking.class)
     Set<Booking> bookings;
 
-    public HotelUser(Long id, @NonNull String name, @NonNull String email, @NonNull LocalDate birthday, @NonNull String phone) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.birthday = birthday;
-        this.phone = phone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public Set<Reviews> getReviewsList() {
-        return reviewsList;
-    }
-
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
-
 }

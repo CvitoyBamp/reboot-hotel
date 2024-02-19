@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sber Hotel by team3 Уплавление пользователями</title>
+    <title>Sber Hotel by team3 Упhавление пользователями</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -64,69 +64,77 @@
                             <h6 class="m-0 font-weight-bold text-primary">Пользователи</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Имя</th>
-                                            <th>Email</th>
-                                            <th>Телефон</th>
-                                            <th>Дата рождения</th>
-                                            <th>Действия</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Имя</th>
-                                            <th>Email</th>
-                                            <th>Телефон</th>
-                                            <th>Дата рождения</th>
-                                            <th>Действия</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr th:each="rm: ${users}">
-                                            <td th:text="${rm.getId}">Id</td>
-                                            <td th:text="${rm.getName}">Имя</td>
-                                            <td th:text="${rm.getEmail()}">Email</td>
-                                            <td th:text="${rm.getPhone()}">Телефон</td>
-                                            <td th:text="${rm.getBirthday()}">Дата рождения</td>
-                                            <td>
-                                                <form th:action="@{/users_admin_delete}" method="post">
-                                                    <input type="hidden" name="id" th:value="${rm.getId}">
-                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm" title="Удалить"></button>
-                                                </form>
-                                              <!--  <a th:hx-post="@{/admin/users/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>-->
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <form th:action="@{/save_user}" method="post">
-                                            <th>
-                                                <input type="number" id="id" name="id">
-                                            </th>
-                                            <th>
-                                                <input type="text" id="name" name="name">
-                                            </th>
-                                            <th>
-                                                <input type="text" id="email" name="email">
-                                            </th>
-                                            <th>
-                                                <input type="text" id="phone" name="phone">
-                                            </th>
-                                            <th>
-                                                <input type="date" id="birthday" name="birthday">
-                                            </th>
-                                            <th>
-                                                <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить"><i class="fas fa-indent"></i></button>
-                                            </th>
-                                            </form>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-responsive" th:object="${hotelUser}">
+                                <form th:action="@{/save_user}" method="post" id="save">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Имя</th>
+                                                <th>Email</th>
+                                                <th>Телефон</th>
+                                                <th>Дата рождения</th>
+                                                <th>Пароль</th>
+                                                <th>Роль</th>
+                                                <th>Действия</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Имя</th>
+                                                <th>Email</th>
+                                                <th>Телефон</th>
+                                                <th>Дата рождения</th>
+                                                <th>Пароль</th>
+                                                <th>Роль</th>
+                                                <th>Действия</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="rm: ${users}">
+                                                <td th:text="${rm.getId()}">Id</td>
+                                                <td th:text="${rm.getName()}">Имя</td>
+                                                <td th:text="${rm.getEmail()}">Email</td>
+                                                <td th:text="${rm.getPhone()}">Телефон</td>
+                                                <td th:text="${rm.getBirthday()}">Дата рождения</td>
+                                                <td th:text="${rm.getPassword()}">Пароль</td>
+                                                <td th:text="${rm.getRoles()}">Роль</td>
+                                                <td>
+                                                    <a th:hx-post="@{/admin/users_admin_delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <input type="number" id="id" name="id">
+                                                </th>
+                                                <th>
+                                                    <input type="text" id="name" name="name" th:field="*{name}">
+                                                </th>
+                                                <th>
+                                                    <input type="text" id="email" name="email" th:field="*{email}">
+                                                </th>
+                                                <th>
+                                                    <input type="text" id="phone" name="phone" th:field="*{phone}">
+                                                </th>
+                                                <th>
+                                                    <input type="date" id="birthday" name="birthday" th:field="*{birthday}">
+                                                </th>
+                                                <th>
+                                                    <select name="adults" id="adults" class="form-control">
+                                                        <option th:each="role : ${roles}" th:value="${role}" th:text="${role.getRoleName()}" th:field="*{roles}">
+                                                        </option>
+                                                    </select>
+                                                </th>
+                                                <th>
+                                                    <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить" form="save"><i class="fas fa-indent"></i></button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -141,7 +149,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website 2024</span>
                     </div>
                 </div>
             </footer>
@@ -195,6 +203,8 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/include_components.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 
 </body>
 

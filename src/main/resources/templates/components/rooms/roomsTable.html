@@ -1,5 +1,5 @@
-<div class="table-responsive" xmlns:th="http://www.w3.org/1999/xhtml">
-    <form hx-post="/admin/rooms/create"
+<div class="table-responsive">
+    <form hx-post="/admin/rooms/table/create"
           hx-swap="none"
           id="newRoom">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -13,13 +13,13 @@
             <tfoot>
             <tr>
                 <th>
-                    <input type="number" id="roomTypeId" name="roomTypeId">
+                    <input type="number" id="roomTypeId" name="roomTypeId" th:value="${roomTypeId}">
                 </th>
                 <th>
-                    <input type="number" id="pricePerDay" name="pricePerDay">
+                    <input type="number" id="pricePerDay" name="pricePerDay" th:value="${pricePerDay}">
                 </th>
                 <th>
-                    <input type="checkbox" checked="checked" id="isLocked" name="isLocked">
+                    <input type="checkbox" checked="checked" id="isLocked" name="isLocked" th:value="${isLocked}">
                 </th>
                 <th>
                     <button type="submit" class="btn btn-success btn-circle btn-sm" title="Добавить" form="newRoom">
@@ -34,7 +34,7 @@
                 <td th:text="${rm.getPricePerDay()}">Цена за день</td>
                 <td th:text="${rm.getIsLocked()}">Номер занят?</td>
                 <td>
-                    <a th:hx-post="@{/admin/rooms/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
+                    <a th:hx-post="@{/admin/rooms/table/delete/{id}(id=${rm.getId()})}" type="submit"  class="btn btn-danger btn-circle btn-sm" title="Удалить">
                         <i class="fas fa-trash"></i>
                     </a>
                 </td>

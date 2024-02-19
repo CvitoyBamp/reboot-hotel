@@ -26,7 +26,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BookingService {
 
-    private HotelUserService hotelUserService;
     private BookingRepository bookingRepository;
 
     public void saveBooking(Booking booking) {
@@ -49,12 +48,9 @@ public class BookingService {
     }
 
     @Transactional(readOnly = true)
-    public HotelUser getUserByUsername(String email) throws UsernameNotFoundException {
-
-        HotelUser hotelUser = hotelUserService.findHotelUserByEmail(email);
-
-        return hotelUser;
-
+    public List<Booking> getBookingsByHotelUser(HotelUser hotelUser) throws UsernameNotFoundException{
+        return bookingRepository.findBookingsByHotelUser(hotelUser)
+                .orElseThrow(() -> new UsernameNotFoundException("User don't found"));
     }
 
 }

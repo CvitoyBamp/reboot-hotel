@@ -1,8 +1,10 @@
 package ru.reboot.hotel.service.reviews;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.reboot.hotel.entity.booking.Booking;
 import ru.reboot.hotel.entity.reviews.Reviews;
 import ru.reboot.hotel.entity.user.HotelUser;
 import ru.reboot.hotel.repository.reviews.ReviewsRepository;
@@ -39,6 +41,12 @@ public class ReviewsService {
     @Transactional
     public void deleteReviewById(String id){
         reviewsRepository.deleteReviewById(Long.valueOf(id));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Reviews> getReviewsByHotelUser(HotelUser hotelUser) throws UsernameNotFoundException {
+        return reviewsRepository.findByHotelUser(hotelUser)
+                .orElseThrow(() -> new UsernameNotFoundException("User don't found"));
     }
 
 }
